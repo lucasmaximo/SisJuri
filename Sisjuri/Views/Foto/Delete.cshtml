@@ -1,0 +1,27 @@
+﻿@model Sisjuri.Models.foto
+
+@{
+    ViewBag.Title = "Excluir foto";
+}
+
+<div class="row">
+    <div class="main-box">
+        <h2>Tem certeza que deseja excluir esta foto?</h2>
+        <div>
+            <hr />
+            <dl class="dl-horizontal">
+
+            </dl>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-actions no-color">
+                        <input type="submit" value="Excluir" class="btn btn-default" /> |
+                        @Html.ActionLink("Cancelar", "List")
+                    </div>
+                }
+        </div>
+    </div>
+</div>

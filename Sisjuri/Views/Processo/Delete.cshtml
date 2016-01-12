@@ -1,0 +1,50 @@
+﻿@model Sisjuri.Models.processo
+
+@{
+    ViewBag.Title = "Excluir processo";
+}
+
+<div class="row">
+    <div class="main-box">
+        <h2>Tem certeza que deseja excluir este processo?</h2>
+        <div>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.LabelFor(model => model.num_processo, "Número do processo")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.num_processo)
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.descricao_processo, "Descrição")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.descricao_processo)
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.juri.nome_juri, "Pertence ao")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.juri.nome_juri)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Excluir" class="btn btn-default" /> |
+                    @Html.ActionLink("Voltar à lista", "List")
+                </div>
+            }
+        </div>
+    </div>
+</div>

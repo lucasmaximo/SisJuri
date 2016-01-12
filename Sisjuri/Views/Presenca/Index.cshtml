@@ -1,0 +1,73 @@
+﻿@model Sisjuri.Models.presenca
+
+@{
+    ViewBag.Title = "Pesquisar participantes de júri simulado";
+}
+
+<div class="row">
+    <div class="main-box">
+        <h2>Pesquisar participantes do júri simulado</h2>
+
+        @using (Html.BeginForm("List", "Presenca"))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.inscricao.usuario.nome_completo, "Nome do aluno", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.inscricao.usuario.nome_completo, new { size = 30, maxlength = 45 })
+                        @Html.ValidationMessageFor(model => model.inscricao.usuario.nome_completo)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.inscricao.funcao.id_funcao, "Função", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.inscricao.funcao.id_funcao, new SelectList(ViewData["lstFuncao"] as System.Collections.IEnumerable, "id_funcao", "nome_funcao"))
+                        @Html.ValidationMessageFor(model => model.inscricao.funcao.id_funcao)
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+                    @Html.LabelFor(model => model.inscricao.funcao.id_funcao, "Função", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <select class="" name="inscricao.funcao.id_funcao">
+                            <option value=""></option>
+                            <option value="Promotor">Promotor</option>
+                            <option value="Advogado de defesa">Advogado de defesa</option>
+                            <option value="Escrivão">Escrivão</option>
+                            <option value="Jurado">Jurado</option>
+                            <option value="Oficial de justiça">Oficial de justiça</option>
+                            <option value="Plateia">Plateia</option>
+                            <option value="Segurança">Segurança</option>
+                            <option value="Réu">Réu</option>
+                            <option value="Juiz">Juiz</option>
+                        </select>
+                        @Html.ValidationMessageFor(model => model.inscricao.funcao.id_funcao)
+                    </div>
+                </div>*@
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.pfk_id_juri, "Júri simulado", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.pfk_id_juri, new SelectList(ViewData["lstJuri"] as System.Collections.IEnumerable, "id_juri", "nome_juri"))
+                        @Html.ValidationMessageFor(model => model.pfk_id_juri)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Pesquisar" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+        <div>
+            @Html.ActionLink("Ir à lista de júris simulados", "List", "Juri")
+        </div>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+﻿@model Sisjuri.Models.juri
+
+@{
+    ViewBag.Title = "Detalhes";
+    Sisjuri.Models.usuario user = ((Sisjuri.Models.usuario)Session["usuario"]);
+}
+
+<div class="row">
+    <div class="main-box">
+        <h2>Detalhes do júri simulado</h2>
+        <div>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.LabelFor(model => model.nome_juri, "Nome do júri simulado")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.nome_juri)
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.data_hora_juri, "Data e hora do evento")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.data_hora_juri)
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.local_juri, "Local do evento")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.local_juri)
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.juri_ativo, "Inscrições abertas?")
+                </dt>
+
+                <dd>
+                    @{
+                        if (Model.juri_ativo == true)
+                        {
+                            <span class="label label-success">Sim</span>                        
+                        }
+                        if (Model.juri_ativo == false)
+                        {
+                            <span class="label label-danger">Não</span>                                                   
+                        }
+                    }
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.npj.nome_npj, "Pertence ao")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.npj.nome_npj)
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+            @{if (user.fk_id_perfil == 1 || user.fk_id_perfil == 2){
+                 @Html.ActionLink("Editar", "Edit", new { id = Model.id_juri })
+            }}    
+            | @Html.ActionLink("Voltar à lista", "List")
+        </p>
+    </div>
+</div>

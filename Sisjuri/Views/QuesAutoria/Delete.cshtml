@@ -1,0 +1,66 @@
+﻿@model Sisjuri.Models.ques_autoria
+
+@{
+    ViewBag.Title = "Excluir quesito da materialidade";
+}
+
+<div class="row">
+    <div class="main-box">
+        <h2>Tem certeza que deseja excluir este quesito da autoria?</h2>
+        <div>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.LabelFor(model => model.quesito_autoria, "Quesito da autoria")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.quesito_autoria)
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.qa_sim, "Votos 'Sim'")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.qa_sim)
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.qa_nao, "Votos 'Não'")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.qa_nao)
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.processo.num_processo, "Pertence ao processo nº")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.processo.num_processo)
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.processo.juri.nome_juri, "Julgado no")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.processo.juri.nome_juri)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Excluir" class="btn btn-default" /> |
+                    @Html.ActionLink("Voltar à lista", "ListByIdProcess", new { id = Model.fk_id_processo })
+                </div>
+            }
+        </div>
+    </div>
+</div>

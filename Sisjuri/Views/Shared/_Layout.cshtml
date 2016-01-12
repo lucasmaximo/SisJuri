@@ -1,0 +1,362 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SisJuri - Sistema Administrador de Júri Simulado</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".fancybox").fancybox({
+                openEffect: 'none',
+                closeEffect: 'none',
+                helpers: {
+                    title : {
+                        type : 'float'
+                    }
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $(function () {
+            $('ul#gallery-photos').sortable({
+                opacity: 0.6, cursor: 'move', update: function () {
+                    var order = $(this).sortable('serialize');
+                    $.post('/gallery-sortimages.html', order, function (theResponse) {
+
+                    });
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $("#profile").click(function () {
+            if ($("#profile").hasClass("open")) {
+                $("#profile").removeClass("open");
+            }
+            else {
+                $("#profile").addClass("open");
+            }
+        });
+    </script>
+
+    @*Máscaras*@
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#cpf").mask("999.999.999-99"),
+            $("#cnpj").mask("99.999.999/9999-99"),
+            $("#telefoneold").mask("(99) 9999-9999"),
+            $("#telefonenew").mask("(99) 99999-9999")
+            $("#datahora").mask("99/99/9999  99:99:99")
+        });
+    </script>
+
+    @*Checkfiles - usado nas fotos*@
+    <script>
+        function Checkfiles(){
+            var fup = document.getElementById('filename');
+            var filename = fup.value;
+            var ext = filename.substring(filename.lastIndexof('.') + 1);
+
+            if (ext == "jpeg" || ext == "png" || ext == "gif") {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <header class="navbar" id="header-navbar">
+        <div class="container">
+            <a href="/Home/Index" id="logo" class="navbar-brand col-md-1 col-sm-3 col-xs-12">
+                <img src="/Content/assets/img/Logo_topo_site.png" alt="">
+            </a>
+            <button class="navbar-toggle" data-target=".navbar-ex1-collapse" data-toggle="collapse" type="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="nav-no-collapse pull-right" id="header-nav">
+                <ul class="nav navbar-nav pull-right">
+                    <li id ="profile" class="dropdown profile-dropdown">
+                       
+                        @Html.Partial("_LoginPartial")
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2" id="nav-col">
+                <section id="col-left">
+                    <div class="collapse navbar-collapse navbar-ex1-collapse" id="sidebar-nav">
+                       
+    @{
+    if (Session["usuario"] != null)
+    {
+        //Início do menu lateral
+        
+        Sisjuri.Models.usuario user = ((Sisjuri.Models.usuario)Session["usuario"]);
+        <ul class="nav nav-pills nav-stacked">
+
+        @{
+            if (user.perfil.nome_perfil.ToLower() == "administrador" || user.perfil.nome_perfil.ToLower() == "organizador")
+            {
+                <li class="">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="fa fa-user"></i>
+                        <span>Usuários</span>
+                        <i class="fa fa-chevron-circle-down drop-icon"></i>
+                    </a>
+
+                    <ul style="display: none;" class="submenu">
+                        <li>
+                            @Html.ActionLink("Cadastrar usuário", "Create", "Usuario")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Visualizar usuários", "List", "Usuario")
+                        </li>
+                        @*<li>
+                                @Html.ActionLink("Lista de usuários - Ajax", "Index", "_Usuario")
+                        </li>*@
+                    </ul>
+                </li>        
+            }
+            if (user.perfil.nome_perfil.ToLower() == "professor")
+            {
+                <li class="">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="fa fa-user"></i>
+                        <span>Usuário</span>
+                        <i class="fa fa-chevron-circle-down drop-icon"></i>
+                    </a>
+
+                    <ul style="display: none;" class="submenu">
+                        <li>
+                            @Html.ActionLink("Editar cadastro", "EditProfessor", "Usuario", new { id = user.id_usuario }, null)
+                        </li>
+                    </ul>
+                </li>         
+            }         
+            if (user.perfil.nome_perfil.ToLower() == "aluno")
+            {
+                <li class="">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="fa fa-user"></i>
+                        <span>Usuário</span>
+                        <i class="fa fa-chevron-circle-down drop-icon"></i>
+                    </a>
+
+                    <ul style="display: none;" class="submenu">
+                        <li>
+                            @Html.ActionLink("Editar cadastro", "EditAluno", "Usuario", new { id = user.id_usuario }, null)
+                        </li>
+                    </ul>
+                </li>                
+            }
+
+            if (user.perfil.nome_perfil.ToLower() == "administrador")
+            {
+            <li class="">
+                <a href="#" class="dropdown-toggle">
+                    <i class="fa fa-bank"></i>
+                    <span>Faculdade</span>
+                    <i class="fa fa-chevron-circle-down drop-icon"></i>
+                </a>
+                <ul style="display: none;" class="submenu">
+                    <li>
+                        @Html.ActionLink("Cadastrar faculdade", "Create", "Faculdade")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Visualizar faculdades", "List", "Faculdade")
+                    </li>
+                </ul>
+            </li>
+            }
+            if (user.perfil.nome_perfil.ToLower() == "organizador")
+            {
+            <li class="">
+                <a href="#" class="dropdown-toggle">
+                    <i class="fa fa-bank"></i>
+                    <span>Faculdade</span>
+                    <i class="fa fa-chevron-circle-down drop-icon"></i>
+                </a>
+                <ul style="display: none;" class="submenu">
+                    <li>
+                        @Html.ActionLink("Visualizar faculdades", "List", "Faculdade")
+                    </li>
+                </ul>
+            </li>
+            }
+            if (user.perfil.nome_perfil.ToLower() == "administrador" || user.perfil.nome_perfil.ToLower() == "organizador")
+            {
+            <li class="">
+                <a href="#" class="dropdown-toggle">
+                    <i class="fa fa-building"></i>
+                    <span>NPJs</span>
+                    <i class="fa fa-chevron-circle-down drop-icon"></i>
+                </a>
+                <ul style="display: none;" class="submenu">
+                    <li>
+                        @Html.ActionLink("Cadastrar NPJ", "Create", "Npj")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Visualizar NPJs", "List", "Npj")
+                    </li>
+                </ul>
+            </li>            
+            }
+
+            if (user.perfil.nome_perfil.ToLower() == "administrador" || user.perfil.nome_perfil.ToLower() == "organizador")
+            {
+                <li class="">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="fa fa-book"></i>
+                        <span>Cursos</span>
+                        <i class="fa fa-chevron-circle-down drop-icon"></i>
+                    </a>
+                    <ul style="display: none;" class="submenu">
+                        <li>
+                            @Html.ActionLink("Cadastrar curso", "Create", "curso")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Visualizar cursos", "List", "curso")
+                        </li>
+                    </ul>
+                </li>
+            }
+            <li class="">
+                <a href="#" class="dropdown-toggle">
+                    <i class="fa fa-balance-scale"></i>
+                    <span>Júri Simulado</span>
+                    <i class="fa fa-chevron-circle-down drop-icon"></i>
+                </a>
+                <ul style="display: none;" class="submenu">
+                    @{if (user.perfil.nome_perfil.ToLower() == "administrador" || user.perfil.nome_perfil.ToLower() == "organizador")
+                        { 
+                        <li>
+                            @Html.ActionLink("Cadastrar júri simulado", "Create", "juri")
+                        </li>
+                        }
+                    }
+                    <li>
+                        @Html.ActionLink("Visualizar júris simulados", "List", "juri")
+                    </li>
+                </ul>
+            </li>
+            <li class="">
+                <a href="#" class="dropdown-toggle">
+                    <i class="fa fa-newspaper-o"></i>
+                    <span>Documentos</span>
+                    <i class="fa fa-chevron-circle-down drop-icon"></i>
+                </a>
+                <ul style="display: none;" class="submenu">
+                    @{if (user.perfil.nome_perfil.ToLower() == "administrador" || user.perfil.nome_perfil.ToLower() == "organizador")
+                    {
+                        <li>
+                            @Html.ActionLink("Inserir documento", "Create", "documento")
+                        </li>
+                    }
+                    }
+                    <li>
+                        @Html.ActionLink("Visualizar documentos", "List", "documento")
+                    </li>
+                </ul>
+            </li>
+            <li class="">
+                <a href="#" class="dropdown-toggle">
+                    <i class="fa fa-pencil-square-o"></i>
+                    <span>Inscrições</span>
+                    <i class="fa fa-chevron-circle-down drop-icon"></i>
+                </a>
+                <ul style="display: none;" class="submenu">
+                    <li>
+                        @Html.ActionLink("Realizar inscrição", "Create", "inscricao")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Pesquisar inscrições", "Index", "inscricao")
+                    </li>
+                </ul>
+            </li>
+            <li class="">
+                <a href="#" class="dropdown-toggle">
+                    <i class="fa fa-cube"></i>
+                    <span>Processos</span>
+                    <i class="fa fa-chevron-circle-down drop-icon"></i>
+                </a>
+                <ul style="display: none;" class="submenu">
+                    @{if (user.perfil.nome_perfil.ToLower() == "administrador" || user.perfil.nome_perfil.ToLower() == "organizador")
+                    {
+                        <li>
+                            @Html.ActionLink("Cadastrar processo", "Create", "processo")
+                        </li>
+                    }
+                    }
+                    <li>
+                        @Html.ActionLink("Visualizar processos", "List", "processo")
+                    </li>
+                </ul>
+            </li>
+            <li class="">
+                <a href="#" class="dropdown-toggle">
+                    <i class="fa fa-image"></i>
+                    <span>Fotos</span>
+                    <i class="fa fa-chevron-circle-down drop-icon"></i>
+                </a>
+                <ul style="display: none;" class="submenu">
+                        <li>
+                            @Html.ActionLink("Pesquisar Fotos", "Index", "foto")
+                        </li>
+                </ul>
+            </li>
+            <li class="">
+                <a href="@Url.Action("Index", "GerarCertificado")">
+                    <i class="fa fa-certificate"></i>
+                    <span>Gerar Certificado</span>
+                </a>
+            </li>
+            }
+        </ul>
+                            
+        //Fim do menu lateral
+
+    }
+}
+    </div>
+        </section>
+        </div>
+            <div id="content-wrapper" class="col-md-10">
+                <div style="opacity: 1; transform: translateY(0px);" class="row">
+                    <div class="col-lg-12">
+                    
+                        @RenderBody()
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="footer-bar-layout">
+        <p id="footer-copyright-layout">
+            © @DateTime.Now.Year - Lucas Eduardo Máximo da Silva - Todos os direitos reservados.
+        </p>
+    </footer>
+
+</body>
+</html>

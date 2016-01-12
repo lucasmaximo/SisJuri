@@ -1,0 +1,1835 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Models.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="curso">
+          <Key>
+            <PropertyRef Name="id_curso" />
+          </Key>
+          <Property Name="id_curso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome_curso" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="descricao_curso" Type="longtext" Nullable="false" />
+          <Property Name="fk_id_faculdade" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="documento">
+          <Key>
+            <PropertyRef Name="id_documento" />
+          </Key>
+          <Property Name="id_documento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome_documento" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="path" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="fk_id_juri" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="faculdade">
+          <Key>
+            <PropertyRef Name="id_faculdade" />
+          </Key>
+          <Property Name="id_faculdade" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome_faculdade" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="telefone_faculdade" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="cnpj_faculdade" Type="varchar" MaxLength="18" Nullable="false" />
+          <Property Name="endereco_faculdade" Type="varchar" MaxLength="60" Nullable="false" />
+        </EntityType>
+        <EntityType Name="foto">
+          <Key>
+            <PropertyRef Name="id_foto" />
+          </Key>
+          <Property Name="id_foto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="path" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="fk_id_juri" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="funcao">
+          <Key>
+            <PropertyRef Name="id_funcao" />
+          </Key>
+          <Property Name="id_funcao" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome_funcao" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="descricao_funcao" Type="longtext" Nullable="false" />
+        </EntityType>
+        <EntityType Name="inscricao">
+          <Key>
+            <PropertyRef Name="id_inscricao" />
+          </Key>
+          <Property Name="id_inscricao" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pfk_id_usuario" Type="int" Nullable="false" />
+          <Property Name="status_inscricao" Type="enum" Nullable="false" />
+          <Property Name="inscricao_sorteada" Type="bit" Nullable="false" />
+          <Property Name="fk_id_funcao" Type="int" Nullable="false" />
+          <Property Name="fk_id_juri" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="juri">
+          <Key>
+            <PropertyRef Name="id_juri" />
+          </Key>
+          <Property Name="id_juri" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome_juri" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="data_hora_juri" Type="datetime" Precision="6" Nullable="false" />
+          <Property Name="local_juri" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="juri_ativo" Type="bit" Nullable="false" />
+          <Property Name="juri_sorteado" Type="bit" Nullable="false" />
+          <Property Name="fk_id_npj" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="npj">
+          <Key>
+            <PropertyRef Name="id_npj" />
+          </Key>
+          <Property Name="id_npj" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome_npj" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="telefone_npj" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="cnpj_npj" Type="varchar" MaxLength="18" Nullable="false" />
+          <Property Name="endereco_npj" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="fk_id_faculdade" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="perfil">
+          <Key>
+            <PropertyRef Name="id_perfil" />
+          </Key>
+          <Property Name="id_perfil" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome_perfil" Type="varchar" MaxLength="35" Nullable="false" />
+          <Property Name="descricao_perfil" Type="longtext" Nullable="false" />
+        </EntityType>
+        <EntityType Name="presenca">
+          <Key>
+            <PropertyRef Name="id_presenca" />
+            <PropertyRef Name="pfk_id_juri" />
+            <PropertyRef Name="pfk_id_inscricao" />
+          </Key>
+          <Property Name="id_presenca" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pfk_id_juri" Type="int" Nullable="false" />
+          <Property Name="pfk_id_inscricao" Type="int" Nullable="false" />
+          <Property Name="pres_entrada" Type="bit" Nullable="false" />
+          <Property Name="conselho_sentenca" Type="bit" Nullable="false" />
+          <Property Name="pres_saida_total" Type="bit" Nullable="false" />
+          <Property Name="pres_saida_parcial" Type="bit" Nullable="false" />
+          <Property Name="hora_saida_parcial" Type="time" Precision="6" />
+          <Property Name="horas_certif" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="processo">
+          <Key>
+            <PropertyRef Name="id_processo" />
+          </Key>
+          <Property Name="id_processo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="num_processo" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="descricao_processo" Type="longtext" Nullable="false" />
+          <Property Name="fk_id_juri" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ques_absolvicao">
+          <Key>
+            <PropertyRef Name="id_quesito_absolvicao" />
+          </Key>
+          <Property Name="id_quesito_absolvicao" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="quesito_absolvicao" Type="longtext" Nullable="false" />
+          <Property Name="qab_sim" Type="int" />
+          <Property Name="qab_nao" Type="int" />
+          <Property Name="fk_id_processo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ques_agravante">
+          <Key>
+            <PropertyRef Name="id_quesito_agravante" />
+          </Key>
+          <Property Name="id_quesito_agravante" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="quesito_agravante" Type="longtext" Nullable="false" />
+          <Property Name="qag_sim" Type="int" />
+          <Property Name="qag_nao" Type="int" />
+          <Property Name="fk_id_processo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ques_atenuante">
+          <Key>
+            <PropertyRef Name="id_quesito_atenuante" />
+          </Key>
+          <Property Name="id_quesito_atenuante" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="quesito_atenuante" Type="longtext" Nullable="false" />
+          <Property Name="qat_sim" Type="int" />
+          <Property Name="qat_nao" Type="int" />
+          <Property Name="fk_id_processo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ques_autoria">
+          <Key>
+            <PropertyRef Name="id_quesito_autoria" />
+          </Key>
+          <Property Name="id_quesito_autoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="quesito_autoria" Type="longtext" Nullable="false" />
+          <Property Name="qa_sim" Type="int" />
+          <Property Name="qa_nao" Type="int" />
+          <Property Name="fk_id_processo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ques_materialidade">
+          <Key>
+            <PropertyRef Name="id_quesito_materialidade" />
+          </Key>
+          <Property Name="id_quesito_materialidade" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="quesito_materialidade" Type="longtext" Nullable="false" />
+          <Property Name="qm_sim" Type="int" />
+          <Property Name="qm_nao" Type="int" />
+          <Property Name="fk_id_processo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ques_tentativa">
+          <Key>
+            <PropertyRef Name="id_quesito_tentativa" />
+          </Key>
+          <Property Name="id_quesito_tentativa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="quesito_tentativa" Type="longtext" Nullable="false" />
+          <Property Name="qt_sim" Type="int" />
+          <Property Name="qt_nao" Type="int" />
+          <Property Name="fk_id_processo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="reu">
+          <Key>
+            <PropertyRef Name="id_reu" />
+          </Key>
+          <Property Name="id_reu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome_reu" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="fk_id_processo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sentenca">
+          <Key>
+            <PropertyRef Name="id_sentenca" />
+          </Key>
+          <Property Name="id_sentenca" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="texto_sentenca" Type="longtext" Nullable="false" />
+          <Property Name="fk_id_processo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome_completo" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="cpf_usuario" Type="varchar" MaxLength="14" Nullable="false" />
+          <Property Name="senha_usuario" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="email_usuario" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="num_matric_aluno" Type="varchar" MaxLength="15" />
+          <Property Name="periodo_aluno" Type="int" />
+          <Property Name="telefone_usuario" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="fk_id_perfil" Type="int" Nullable="false" />
+          <Property Name="fk_id_faculdade" Type="int" Nullable="false" />
+          <Property Name="fk_id_curso" Type="int" />
+        </EntityType>
+        <EntityType Name="vitima">
+          <Key>
+            <PropertyRef Name="id_vitima" />
+          </Key>
+          <Property Name="id_vitima" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome_vitima" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="fk_id_processo" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'def.sisjuri.vgerarcertificado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vgerarcertificado">
+          <Key>
+            <PropertyRef Name="id_juri" />
+            <PropertyRef Name="id_presenca" />
+            <PropertyRef Name="id_usuario" />
+            <PropertyRef Name="nome_aluno" />
+            <PropertyRef Name="cpf_usuario" />
+            <PropertyRef Name="nome_funcao" />
+            <PropertyRef Name="nome_juri" />
+            <PropertyRef Name="local_juri" />
+            <PropertyRef Name="data_hora_juri" />
+          </Key>
+          <Property Name="id_juri" Type="int" Nullable="false" />
+          <Property Name="id_presenca" Type="int" Nullable="false" />
+          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="nome_aluno" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="cpf_usuario" Type="varchar" MaxLength="14" Nullable="false" />
+          <Property Name="nome_funcao" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="nome_juri" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="local_juri" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="data_hora_juri" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="horas_certif" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'def.sisjuri.vhistoricojuri' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vhistoricojuri">
+          <Key>
+            <PropertyRef Name="id_juri" />
+            <PropertyRef Name="nome_juri" />
+            <PropertyRef Name="data_hora_juri" />
+            <PropertyRef Name="local_juri" />
+            <PropertyRef Name="juri_ativo" />
+            <PropertyRef Name="inscricao_sorteada" />
+            <PropertyRef Name="nome_aluno" />
+            <PropertyRef Name="nome_curso" />
+            <PropertyRef Name="nome_funcao" />
+            <PropertyRef Name="id_processo" />
+            <PropertyRef Name="num_processo" />
+            <PropertyRef Name="descricao_processo" />
+            <PropertyRef Name="texto_sentenca" />
+          </Key>
+          <Property Name="id_juri" Type="int" Nullable="false" />
+          <Property Name="nome_juri" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="data_hora_juri" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="local_juri" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="juri_ativo" Type="bit" Nullable="false" />
+          <Property Name="inscricao_sorteada" Type="bit" Nullable="false" />
+          <Property Name="nome_aluno" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="nome_curso" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="nome_funcao" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="id_processo" Type="int" Nullable="false" />
+          <Property Name="num_processo" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="descricao_processo" Type="longtext" Nullable="false" />
+          <Property Name="texto_sentenca" Type="longtext" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'def.sisjuri.vlistadepresenca' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vlistadepresenca">
+          <Key>
+            <PropertyRef Name="id_juri" />
+            <PropertyRef Name="nome_juri" />
+            <PropertyRef Name="nome_aluno" />
+            <PropertyRef Name="nome_curso" />
+            <PropertyRef Name="nome_funcao" />
+            <PropertyRef Name="pres_entrada" />
+            <PropertyRef Name="conselho_sentenca" />
+            <PropertyRef Name="pres_saida_total" />
+            <PropertyRef Name="pres_saida_parcial" />
+          </Key>
+          <Property Name="id_juri" Type="int" Nullable="false" />
+          <Property Name="nome_juri" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="nome_aluno" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="nome_curso" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="periodo_aluno" Type="int" />
+          <Property Name="nome_funcao" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="pres_entrada" Type="bit" Nullable="false" />
+          <Property Name="conselho_sentenca" Type="bit" Nullable="false" />
+          <Property Name="pres_saida_total" Type="bit" Nullable="false" />
+          <Property Name="pres_saida_parcial" Type="bit" Nullable="false" />
+          <Property Name="hora_saida_parcial" Type="time" Precision="0" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'def.sisjuri.vsorteiofuncoes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vsorteiofuncoes">
+          <Key>
+            <PropertyRef Name="id_juri" />
+            <PropertyRef Name="nome_aluno" />
+            <PropertyRef Name="nome_curso" />
+            <PropertyRef Name="nome_funcao" />
+          </Key>
+          <Property Name="id_juri" Type="int" Nullable="false" />
+          <Property Name="nome_aluno" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="num_matric_aluno" Type="varchar" MaxLength="15" />
+          <Property Name="nome_curso" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="periodo_aluno" Type="int" />
+          <Property Name="nome_funcao" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_curso_faculdade1">
+          <End Role="faculdade" Type="Self.faculdade" Multiplicity="1" />
+          <End Role="curso" Type="Self.curso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="faculdade">
+              <PropertyRef Name="id_faculdade" />
+            </Principal>
+            <Dependent Role="curso">
+              <PropertyRef Name="fk_id_faculdade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_documento_juri1">
+          <End Role="juri" Type="Self.juri" Multiplicity="1" />
+          <End Role="documento" Type="Self.documento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="juri">
+              <PropertyRef Name="id_juri" />
+            </Principal>
+            <Dependent Role="documento">
+              <PropertyRef Name="fk_id_juri" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_foto_juri1">
+          <End Role="juri" Type="Self.juri" Multiplicity="1" />
+          <End Role="foto" Type="Self.foto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="juri">
+              <PropertyRef Name="id_juri" />
+            </Principal>
+            <Dependent Role="foto">
+              <PropertyRef Name="fk_id_juri" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_frequencia_juri1">
+          <End Role="juri" Type="Self.juri" Multiplicity="1" />
+          <End Role="presenca" Type="Self.presenca" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="juri">
+              <PropertyRef Name="id_juri" />
+            </Principal>
+            <Dependent Role="presenca">
+              <PropertyRef Name="pfk_id_juri" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_inscricao_funcao1">
+          <End Role="funcao" Type="Self.funcao" Multiplicity="1" />
+          <End Role="inscricao" Type="Self.inscricao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="funcao">
+              <PropertyRef Name="id_funcao" />
+            </Principal>
+            <Dependent Role="inscricao">
+              <PropertyRef Name="fk_id_funcao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_inscricao_juri1">
+          <End Role="juri" Type="Self.juri" Multiplicity="1" />
+          <End Role="inscricao" Type="Self.inscricao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="juri">
+              <PropertyRef Name="id_juri" />
+            </Principal>
+            <Dependent Role="inscricao">
+              <PropertyRef Name="fk_id_juri" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_inscricao_usuario1">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="inscricao" Type="Self.inscricao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="inscricao">
+              <PropertyRef Name="pfk_id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_juri_npj1">
+          <End Role="npj" Type="Self.npj" Multiplicity="1" />
+          <End Role="juri" Type="Self.juri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="npj">
+              <PropertyRef Name="id_npj" />
+            </Principal>
+            <Dependent Role="juri">
+              <PropertyRef Name="fk_id_npj" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_npj_faculdade1">
+          <End Role="faculdade" Type="Self.faculdade" Multiplicity="1" />
+          <End Role="npj" Type="Self.npj" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="faculdade">
+              <PropertyRef Name="id_faculdade" />
+            </Principal>
+            <Dependent Role="npj">
+              <PropertyRef Name="fk_id_faculdade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_presenca_inscricao1">
+          <End Role="inscricao" Type="Self.inscricao" Multiplicity="1" />
+          <End Role="presenca" Type="Self.presenca" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="inscricao">
+              <PropertyRef Name="id_inscricao" />
+            </Principal>
+            <Dependent Role="presenca">
+              <PropertyRef Name="pfk_id_inscricao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_processo_juri1">
+          <End Role="juri" Type="Self.juri" Multiplicity="1" />
+          <End Role="processo" Type="Self.processo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="juri">
+              <PropertyRef Name="id_juri" />
+            </Principal>
+            <Dependent Role="processo">
+              <PropertyRef Name="fk_id_juri" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_quesito_absolvicao_processo1">
+          <End Role="processo" Type="Self.processo" Multiplicity="1" />
+          <End Role="ques_absolvicao" Type="Self.ques_absolvicao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="processo">
+              <PropertyRef Name="id_processo" />
+            </Principal>
+            <Dependent Role="ques_absolvicao">
+              <PropertyRef Name="fk_id_processo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_quesito_agravante_processo1">
+          <End Role="processo" Type="Self.processo" Multiplicity="1" />
+          <End Role="ques_agravante" Type="Self.ques_agravante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="processo">
+              <PropertyRef Name="id_processo" />
+            </Principal>
+            <Dependent Role="ques_agravante">
+              <PropertyRef Name="fk_id_processo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_quesito_atenuante_processo1">
+          <End Role="processo" Type="Self.processo" Multiplicity="1" />
+          <End Role="ques_atenuante" Type="Self.ques_atenuante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="processo">
+              <PropertyRef Name="id_processo" />
+            </Principal>
+            <Dependent Role="ques_atenuante">
+              <PropertyRef Name="fk_id_processo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_quesito_autoria_processo1">
+          <End Role="processo" Type="Self.processo" Multiplicity="1" />
+          <End Role="ques_autoria" Type="Self.ques_autoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="processo">
+              <PropertyRef Name="id_processo" />
+            </Principal>
+            <Dependent Role="ques_autoria">
+              <PropertyRef Name="fk_id_processo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_quesito_materialidade_processo1">
+          <End Role="processo" Type="Self.processo" Multiplicity="1" />
+          <End Role="ques_materialidade" Type="Self.ques_materialidade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="processo">
+              <PropertyRef Name="id_processo" />
+            </Principal>
+            <Dependent Role="ques_materialidade">
+              <PropertyRef Name="fk_id_processo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_quesito_tentativa_processo1">
+          <End Role="processo" Type="Self.processo" Multiplicity="1" />
+          <End Role="ques_tentativa" Type="Self.ques_tentativa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="processo">
+              <PropertyRef Name="id_processo" />
+            </Principal>
+            <Dependent Role="ques_tentativa">
+              <PropertyRef Name="fk_id_processo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_reu_processo1">
+          <End Role="processo" Type="Self.processo" Multiplicity="1" />
+          <End Role="reu" Type="Self.reu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="processo">
+              <PropertyRef Name="id_processo" />
+            </Principal>
+            <Dependent Role="reu">
+              <PropertyRef Name="fk_id_processo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_sentenca_processo1">
+          <End Role="processo" Type="Self.processo" Multiplicity="1" />
+          <End Role="sentenca" Type="Self.sentenca" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="processo">
+              <PropertyRef Name="id_processo" />
+            </Principal>
+            <Dependent Role="sentenca">
+              <PropertyRef Name="fk_id_processo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario_curso2">
+          <End Role="curso" Type="Self.curso" Multiplicity="0..1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="curso">
+              <PropertyRef Name="id_curso" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="fk_id_curso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario_faculdade1">
+          <End Role="faculdade" Type="Self.faculdade" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="faculdade">
+              <PropertyRef Name="id_faculdade" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="fk_id_faculdade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario_perfil1">
+          <End Role="perfil" Type="Self.perfil" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="perfil">
+              <PropertyRef Name="id_perfil" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="fk_id_perfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_vitima_processo1">
+          <End Role="processo" Type="Self.processo" Multiplicity="1" />
+          <End Role="vitima" Type="Self.vitima" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="processo">
+              <PropertyRef Name="id_processo" />
+            </Principal>
+            <Dependent Role="vitima">
+              <PropertyRef Name="fk_id_processo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelsStoreContainer">
+          <EntitySet Name="curso" EntityType="Self.curso" Schema="sisjuri" store:Type="Tables" />
+          <EntitySet Name="documento" EntityType="Self.documento" Schema="sisjuri" store:Type="Tables" />
+          <EntitySet Name="faculdade" EntityType="Self.faculdade" Schema="sisjuri" store:Type="Tables" />
+          <EntitySet Name="foto" EntityType="Self.foto" Schema="sisjuri" store:Type="Tables" />
+          <EntitySet Name="funcao" EntityType="Self.funcao" Schema="sisjuri" store:Type="Tables" />
+          <EntitySet Name="inscricao" EntityType="Self.inscricao" Schema="sisjuri" store:Type="Tables" />
+          <EntitySet Name="juri" EntityType="Self.juri" Schema="sisjuri" store:Type="Tables" />
+          <EntitySet Name="npj" EntityType="Self.npj" Schema="sisjuri" store:Type="Tables" />
+          <EntitySet Name="perfil" EntityType="Self.perfil" Schema="sisjuri" store:Type="Tables" />
+          <EntitySet Name="presenca" EntityType="Self.presenca" Schema="sisjuri" store:Type="Tables" />
+          <EntitySet Name="processo" EntityType="Self.processo" Schema="sisjuri" store:Type="Tables" />
+          <EntitySet Name="ques_absolvicao" EntityType="Self.ques_absolvicao" Schema="sisjuri" store:Type="Tables" />
+          <EntitySet Name="ques_agravante" EntityType="Self.ques_agravante" Schema="sisjuri" store:Type="Tables" />
+          <EntitySet Name="ques_atenuante" EntityType="Self.ques_atenuante" Schema="sisjuri" store:Type="Tables" />
+          <EntitySet Name="ques_autoria" EntityType="Self.ques_autoria" Schema="sisjuri" store:Type="Tables" />
+          <EntitySet Name="ques_materialidade" EntityType="Self.ques_materialidade" Schema="sisjuri" store:Type="Tables" />
+          <EntitySet Name="ques_tentativa" EntityType="Self.ques_tentativa" Schema="sisjuri" store:Type="Tables" />
+          <EntitySet Name="reu" EntityType="Self.reu" Schema="sisjuri" store:Type="Tables" />
+          <EntitySet Name="sentenca" EntityType="Self.sentenca" Schema="sisjuri" store:Type="Tables" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" Schema="sisjuri" store:Type="Tables" />
+          <EntitySet Name="vitima" EntityType="Self.vitima" Schema="sisjuri" store:Type="Tables" />
+          <EntitySet Name="vgerarcertificado" EntityType="Self.vgerarcertificado" store:Type="Views" store:Schema="sisjuri">
+            <DefiningQuery>SELECT
+`vgerarcertificado`.`id_juri`, 
+`vgerarcertificado`.`id_presenca`, 
+`vgerarcertificado`.`id_usuario`, 
+`vgerarcertificado`.`nome_aluno`, 
+`vgerarcertificado`.`cpf_usuario`, 
+`vgerarcertificado`.`nome_funcao`, 
+`vgerarcertificado`.`nome_juri`, 
+`vgerarcertificado`.`local_juri`, 
+`vgerarcertificado`.`data_hora_juri`, 
+`vgerarcertificado`.`horas_certif`
+FROM `vgerarcertificado` AS `vgerarcertificado`</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vhistoricojuri" EntityType="Self.vhistoricojuri" store:Type="Views" store:Schema="sisjuri">
+            <DefiningQuery>SELECT
+`vhistoricojuri`.`id_juri`, 
+`vhistoricojuri`.`nome_juri`, 
+`vhistoricojuri`.`data_hora_juri`, 
+`vhistoricojuri`.`local_juri`, 
+`vhistoricojuri`.`juri_ativo`, 
+`vhistoricojuri`.`inscricao_sorteada`, 
+`vhistoricojuri`.`nome_aluno`, 
+`vhistoricojuri`.`nome_curso`, 
+`vhistoricojuri`.`nome_funcao`, 
+`vhistoricojuri`.`id_processo`, 
+`vhistoricojuri`.`num_processo`, 
+`vhistoricojuri`.`descricao_processo`, 
+`vhistoricojuri`.`texto_sentenca`
+FROM `vhistoricojuri` AS `vhistoricojuri`</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vlistadepresenca" EntityType="Self.vlistadepresenca" store:Type="Views" store:Schema="sisjuri">
+            <DefiningQuery>SELECT
+`vlistadepresenca`.`id_juri`, 
+`vlistadepresenca`.`nome_juri`, 
+`vlistadepresenca`.`nome_aluno`, 
+`vlistadepresenca`.`nome_curso`, 
+`vlistadepresenca`.`periodo_aluno`, 
+`vlistadepresenca`.`nome_funcao`, 
+`vlistadepresenca`.`pres_entrada`, 
+`vlistadepresenca`.`conselho_sentenca`, 
+`vlistadepresenca`.`pres_saida_total`, 
+`vlistadepresenca`.`pres_saida_parcial`, 
+`vlistadepresenca`.`hora_saida_parcial`
+FROM `vlistadepresenca` AS `vlistadepresenca`</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vsorteiofuncoes" EntityType="Self.vsorteiofuncoes" store:Type="Views" store:Schema="sisjuri">
+            <DefiningQuery>SELECT
+`vsorteiofuncoes`.`id_juri`, 
+`vsorteiofuncoes`.`nome_aluno`, 
+`vsorteiofuncoes`.`num_matric_aluno`, 
+`vsorteiofuncoes`.`nome_curso`, 
+`vsorteiofuncoes`.`periodo_aluno`, 
+`vsorteiofuncoes`.`nome_funcao`
+FROM `vsorteiofuncoes` AS `vsorteiofuncoes`</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="fk_curso_faculdade1" Association="Self.fk_curso_faculdade1">
+            <End Role="faculdade" EntitySet="faculdade" />
+            <End Role="curso" EntitySet="curso" />
+          </AssociationSet>
+          <AssociationSet Name="fk_documento_juri1" Association="Self.fk_documento_juri1">
+            <End Role="juri" EntitySet="juri" />
+            <End Role="documento" EntitySet="documento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_foto_juri1" Association="Self.fk_foto_juri1">
+            <End Role="juri" EntitySet="juri" />
+            <End Role="foto" EntitySet="foto" />
+          </AssociationSet>
+          <AssociationSet Name="fk_frequencia_juri1" Association="Self.fk_frequencia_juri1">
+            <End Role="juri" EntitySet="juri" />
+            <End Role="presenca" EntitySet="presenca" />
+          </AssociationSet>
+          <AssociationSet Name="fk_inscricao_funcao1" Association="Self.fk_inscricao_funcao1">
+            <End Role="funcao" EntitySet="funcao" />
+            <End Role="inscricao" EntitySet="inscricao" />
+          </AssociationSet>
+          <AssociationSet Name="fk_inscricao_juri1" Association="Self.fk_inscricao_juri1">
+            <End Role="juri" EntitySet="juri" />
+            <End Role="inscricao" EntitySet="inscricao" />
+          </AssociationSet>
+          <AssociationSet Name="fk_inscricao_usuario1" Association="Self.fk_inscricao_usuario1">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="inscricao" EntitySet="inscricao" />
+          </AssociationSet>
+          <AssociationSet Name="fk_juri_npj1" Association="Self.fk_juri_npj1">
+            <End Role="npj" EntitySet="npj" />
+            <End Role="juri" EntitySet="juri" />
+          </AssociationSet>
+          <AssociationSet Name="fk_npj_faculdade1" Association="Self.fk_npj_faculdade1">
+            <End Role="faculdade" EntitySet="faculdade" />
+            <End Role="npj" EntitySet="npj" />
+          </AssociationSet>
+          <AssociationSet Name="fk_presenca_inscricao1" Association="Self.fk_presenca_inscricao1">
+            <End Role="inscricao" EntitySet="inscricao" />
+            <End Role="presenca" EntitySet="presenca" />
+          </AssociationSet>
+          <AssociationSet Name="fk_processo_juri1" Association="Self.fk_processo_juri1">
+            <End Role="juri" EntitySet="juri" />
+            <End Role="processo" EntitySet="processo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_quesito_absolvicao_processo1" Association="Self.fk_quesito_absolvicao_processo1">
+            <End Role="processo" EntitySet="processo" />
+            <End Role="ques_absolvicao" EntitySet="ques_absolvicao" />
+          </AssociationSet>
+          <AssociationSet Name="fk_quesito_agravante_processo1" Association="Self.fk_quesito_agravante_processo1">
+            <End Role="processo" EntitySet="processo" />
+            <End Role="ques_agravante" EntitySet="ques_agravante" />
+          </AssociationSet>
+          <AssociationSet Name="fk_quesito_atenuante_processo1" Association="Self.fk_quesito_atenuante_processo1">
+            <End Role="processo" EntitySet="processo" />
+            <End Role="ques_atenuante" EntitySet="ques_atenuante" />
+          </AssociationSet>
+          <AssociationSet Name="fk_quesito_autoria_processo1" Association="Self.fk_quesito_autoria_processo1">
+            <End Role="processo" EntitySet="processo" />
+            <End Role="ques_autoria" EntitySet="ques_autoria" />
+          </AssociationSet>
+          <AssociationSet Name="fk_quesito_materialidade_processo1" Association="Self.fk_quesito_materialidade_processo1">
+            <End Role="processo" EntitySet="processo" />
+            <End Role="ques_materialidade" EntitySet="ques_materialidade" />
+          </AssociationSet>
+          <AssociationSet Name="fk_quesito_tentativa_processo1" Association="Self.fk_quesito_tentativa_processo1">
+            <End Role="processo" EntitySet="processo" />
+            <End Role="ques_tentativa" EntitySet="ques_tentativa" />
+          </AssociationSet>
+          <AssociationSet Name="fk_reu_processo1" Association="Self.fk_reu_processo1">
+            <End Role="processo" EntitySet="processo" />
+            <End Role="reu" EntitySet="reu" />
+          </AssociationSet>
+          <AssociationSet Name="fk_sentenca_processo1" Association="Self.fk_sentenca_processo1">
+            <End Role="processo" EntitySet="processo" />
+            <End Role="sentenca" EntitySet="sentenca" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuario_curso2" Association="Self.fk_usuario_curso2">
+            <End Role="curso" EntitySet="curso" />
+            <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuario_faculdade1" Association="Self.fk_usuario_faculdade1">
+            <End Role="faculdade" EntitySet="faculdade" />
+            <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuario_perfil1" Association="Self.fk_usuario_perfil1">
+            <End Role="perfil" EntitySet="perfil" />
+            <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+          <AssociationSet Name="fk_vitima_processo1" Association="Self.fk_vitima_processo1">
+            <End Role="processo" EntitySet="processo" />
+            <End Role="vitima" EntitySet="vitima" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DataModel" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="curso" EntityType="Models.curso" />
+          <EntitySet Name="documento" EntityType="Models.documento" />
+          <EntitySet Name="faculdade" EntityType="Models.faculdade" />
+          <EntitySet Name="foto" EntityType="Models.foto" />
+          <EntitySet Name="funcao" EntityType="Models.funcao" />
+          <EntitySet Name="inscricao" EntityType="Models.inscricao" />
+          <EntitySet Name="juri" EntityType="Models.juri" />
+          <EntitySet Name="npj" EntityType="Models.npj" />
+          <EntitySet Name="perfil" EntityType="Models.perfil" />
+          <EntitySet Name="presenca" EntityType="Models.presenca" />
+          <EntitySet Name="processo" EntityType="Models.processo" />
+          <EntitySet Name="ques_absolvicao" EntityType="Models.ques_absolvicao" />
+          <EntitySet Name="ques_agravante" EntityType="Models.ques_agravante" />
+          <EntitySet Name="ques_atenuante" EntityType="Models.ques_atenuante" />
+          <EntitySet Name="ques_autoria" EntityType="Models.ques_autoria" />
+          <EntitySet Name="ques_materialidade" EntityType="Models.ques_materialidade" />
+          <EntitySet Name="ques_tentativa" EntityType="Models.ques_tentativa" />
+          <EntitySet Name="reu" EntityType="Models.reu" />
+          <EntitySet Name="sentenca" EntityType="Models.sentenca" />
+          <EntitySet Name="usuario" EntityType="Models.usuario" />
+          <EntitySet Name="vitima" EntityType="Models.vitima" />
+          <EntitySet Name="vgerarcertificado" EntityType="Models.vgerarcertificado" />
+          <EntitySet Name="vhistoricojuri" EntityType="Models.vhistoricojuri" />
+          <EntitySet Name="vlistadepresenca" EntityType="Models.vlistadepresenca" />
+          <EntitySet Name="vsorteiofuncoes" EntityType="Models.vsorteiofuncoes" />
+          <AssociationSet Name="fk_curso_faculdade1" Association="Models.fk_curso_faculdade1">
+            <End Role="faculdade" EntitySet="faculdade" />
+            <End Role="curso" EntitySet="curso" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuario_curso2" Association="Models.fk_usuario_curso2">
+            <End Role="curso" EntitySet="curso" />
+            <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+          <AssociationSet Name="fk_documento_juri1" Association="Models.fk_documento_juri1">
+            <End Role="juri" EntitySet="juri" />
+            <End Role="documento" EntitySet="documento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_npj_faculdade1" Association="Models.fk_npj_faculdade1">
+            <End Role="faculdade" EntitySet="faculdade" />
+            <End Role="npj" EntitySet="npj" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuario_faculdade1" Association="Models.fk_usuario_faculdade1">
+            <End Role="faculdade" EntitySet="faculdade" />
+            <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+          <AssociationSet Name="fk_foto_juri1" Association="Models.fk_foto_juri1">
+            <End Role="juri" EntitySet="juri" />
+            <End Role="foto" EntitySet="foto" />
+          </AssociationSet>
+          <AssociationSet Name="fk_inscricao_funcao1" Association="Models.fk_inscricao_funcao1">
+            <End Role="funcao" EntitySet="funcao" />
+            <End Role="inscricao" EntitySet="inscricao" />
+          </AssociationSet>
+          <AssociationSet Name="fk_inscricao_juri1" Association="Models.fk_inscricao_juri1">
+            <End Role="juri" EntitySet="juri" />
+            <End Role="inscricao" EntitySet="inscricao" />
+          </AssociationSet>
+          <AssociationSet Name="fk_inscricao_usuario1" Association="Models.fk_inscricao_usuario1">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="inscricao" EntitySet="inscricao" />
+          </AssociationSet>
+          <AssociationSet Name="fk_presenca_inscricao1" Association="Models.fk_presenca_inscricao1">
+            <End Role="inscricao" EntitySet="inscricao" />
+            <End Role="presenca" EntitySet="presenca" />
+          </AssociationSet>
+          <AssociationSet Name="fk_frequencia_juri1" Association="Models.fk_frequencia_juri1">
+            <End Role="juri" EntitySet="juri" />
+            <End Role="presenca" EntitySet="presenca" />
+          </AssociationSet>
+          <AssociationSet Name="fk_juri_npj1" Association="Models.fk_juri_npj1">
+            <End Role="npj" EntitySet="npj" />
+            <End Role="juri" EntitySet="juri" />
+          </AssociationSet>
+          <AssociationSet Name="fk_processo_juri1" Association="Models.fk_processo_juri1">
+            <End Role="juri" EntitySet="juri" />
+            <End Role="processo" EntitySet="processo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuario_perfil1" Association="Models.fk_usuario_perfil1">
+            <End Role="perfil" EntitySet="perfil" />
+            <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+          <AssociationSet Name="fk_quesito_absolvicao_processo1" Association="Models.fk_quesito_absolvicao_processo1">
+            <End Role="processo" EntitySet="processo" />
+            <End Role="ques_absolvicao" EntitySet="ques_absolvicao" />
+          </AssociationSet>
+          <AssociationSet Name="fk_quesito_agravante_processo1" Association="Models.fk_quesito_agravante_processo1">
+            <End Role="processo" EntitySet="processo" />
+            <End Role="ques_agravante" EntitySet="ques_agravante" />
+          </AssociationSet>
+          <AssociationSet Name="fk_quesito_atenuante_processo1" Association="Models.fk_quesito_atenuante_processo1">
+            <End Role="processo" EntitySet="processo" />
+            <End Role="ques_atenuante" EntitySet="ques_atenuante" />
+          </AssociationSet>
+          <AssociationSet Name="fk_quesito_autoria_processo1" Association="Models.fk_quesito_autoria_processo1">
+            <End Role="processo" EntitySet="processo" />
+            <End Role="ques_autoria" EntitySet="ques_autoria" />
+          </AssociationSet>
+          <AssociationSet Name="fk_quesito_materialidade_processo1" Association="Models.fk_quesito_materialidade_processo1">
+            <End Role="processo" EntitySet="processo" />
+            <End Role="ques_materialidade" EntitySet="ques_materialidade" />
+          </AssociationSet>
+          <AssociationSet Name="fk_quesito_tentativa_processo1" Association="Models.fk_quesito_tentativa_processo1">
+            <End Role="processo" EntitySet="processo" />
+            <End Role="ques_tentativa" EntitySet="ques_tentativa" />
+          </AssociationSet>
+          <AssociationSet Name="fk_reu_processo1" Association="Models.fk_reu_processo1">
+            <End Role="processo" EntitySet="processo" />
+            <End Role="reu" EntitySet="reu" />
+          </AssociationSet>
+          <AssociationSet Name="fk_sentenca_processo1" Association="Models.fk_sentenca_processo1">
+            <End Role="processo" EntitySet="processo" />
+            <End Role="sentenca" EntitySet="sentenca" />
+          </AssociationSet>
+          <AssociationSet Name="fk_vitima_processo1" Association="Models.fk_vitima_processo1">
+            <End Role="processo" EntitySet="processo" />
+            <End Role="vitima" EntitySet="vitima" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="curso">
+          <Key>
+            <PropertyRef Name="id_curso" />
+          </Key>
+          <Property Name="id_curso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome_curso" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="descricao_curso" Type="String" Nullable="false" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="fk_id_faculdade" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="faculdade" Relationship="Models.fk_curso_faculdade1" FromRole="curso" ToRole="faculdade" />
+          <NavigationProperty Name="usuario" Relationship="Models.fk_usuario_curso2" FromRole="curso" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="documento">
+          <Key>
+            <PropertyRef Name="id_documento" />
+          </Key>
+          <Property Name="id_documento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome_documento" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="path" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="fk_id_juri" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="juri" Relationship="Models.fk_documento_juri1" FromRole="documento" ToRole="juri" />
+        </EntityType>
+        <EntityType Name="faculdade">
+          <Key>
+            <PropertyRef Name="id_faculdade" />
+          </Key>
+          <Property Name="id_faculdade" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome_faculdade" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="telefone_faculdade" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="cnpj_faculdade" Type="String" Nullable="false" MaxLength="18" FixedLength="false" Unicode="false" />
+          <Property Name="endereco_faculdade" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="curso" Relationship="Models.fk_curso_faculdade1" FromRole="faculdade" ToRole="curso" />
+          <NavigationProperty Name="npj" Relationship="Models.fk_npj_faculdade1" FromRole="faculdade" ToRole="npj" />
+          <NavigationProperty Name="usuario" Relationship="Models.fk_usuario_faculdade1" FromRole="faculdade" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="foto">
+          <Key>
+            <PropertyRef Name="id_foto" />
+          </Key>
+          <Property Name="id_foto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="path" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="fk_id_juri" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="juri" Relationship="Models.fk_foto_juri1" FromRole="foto" ToRole="juri" />
+        </EntityType>
+        <EntityType Name="funcao">
+          <Key>
+            <PropertyRef Name="id_funcao" />
+          </Key>
+          <Property Name="id_funcao" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome_funcao" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="descricao_funcao" Type="String" Nullable="false" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="inscricao" Relationship="Models.fk_inscricao_funcao1" FromRole="funcao" ToRole="inscricao" />
+        </EntityType>
+        <EntityType Name="inscricao">
+          <Key>
+            <PropertyRef Name="id_inscricao" />
+          </Key>
+          <Property Name="id_inscricao" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pfk_id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="status_inscricao" Type="String" Nullable="false" MaxLength="65532" FixedLength="false" Unicode="false" />
+          <Property Name="inscricao_sorteada" Type="Boolean" Nullable="false" />
+          <Property Name="fk_id_funcao" Type="Int32" Nullable="false" />
+          <Property Name="fk_id_juri" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="funcao" Relationship="Models.fk_inscricao_funcao1" FromRole="inscricao" ToRole="funcao" />
+          <NavigationProperty Name="juri" Relationship="Models.fk_inscricao_juri1" FromRole="inscricao" ToRole="juri" />
+          <NavigationProperty Name="usuario" Relationship="Models.fk_inscricao_usuario1" FromRole="inscricao" ToRole="usuario" />
+          <NavigationProperty Name="presenca" Relationship="Models.fk_presenca_inscricao1" FromRole="inscricao" ToRole="presenca" />
+        </EntityType>
+        <EntityType Name="juri">
+          <Key>
+            <PropertyRef Name="id_juri" />
+          </Key>
+          <Property Name="id_juri" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome_juri" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="data_hora_juri" Type="DateTime" Nullable="false" />
+          <Property Name="local_juri" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="juri_ativo" Type="Boolean" Nullable="false" />
+          <Property Name="juri_sorteado" Type="Boolean" Nullable="false" />
+          <Property Name="fk_id_npj" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="documento" Relationship="Models.fk_documento_juri1" FromRole="juri" ToRole="documento" />
+          <NavigationProperty Name="foto" Relationship="Models.fk_foto_juri1" FromRole="juri" ToRole="foto" />
+          <NavigationProperty Name="inscricao" Relationship="Models.fk_inscricao_juri1" FromRole="juri" ToRole="inscricao" />
+          <NavigationProperty Name="presenca" Relationship="Models.fk_frequencia_juri1" FromRole="juri" ToRole="presenca" />
+          <NavigationProperty Name="npj" Relationship="Models.fk_juri_npj1" FromRole="juri" ToRole="npj" />
+          <NavigationProperty Name="processo" Relationship="Models.fk_processo_juri1" FromRole="juri" ToRole="processo" />
+        </EntityType>
+        <EntityType Name="npj">
+          <Key>
+            <PropertyRef Name="id_npj" />
+          </Key>
+          <Property Name="id_npj" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome_npj" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="telefone_npj" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="cnpj_npj" Type="String" Nullable="false" MaxLength="18" FixedLength="false" Unicode="false" />
+          <Property Name="endereco_npj" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="fk_id_faculdade" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="faculdade" Relationship="Models.fk_npj_faculdade1" FromRole="npj" ToRole="faculdade" />
+          <NavigationProperty Name="juri" Relationship="Models.fk_juri_npj1" FromRole="npj" ToRole="juri" />
+        </EntityType>
+        <EntityType Name="perfil">
+          <Key>
+            <PropertyRef Name="id_perfil" />
+          </Key>
+          <Property Name="id_perfil" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome_perfil" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="descricao_perfil" Type="String" Nullable="false" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="usuario" Relationship="Models.fk_usuario_perfil1" FromRole="perfil" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="presenca">
+          <Key>
+            <PropertyRef Name="id_presenca" />
+            <PropertyRef Name="pfk_id_juri" />
+            <PropertyRef Name="pfk_id_inscricao" />
+          </Key>
+          <Property Name="id_presenca" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pfk_id_juri" Type="Int32" Nullable="false" />
+          <Property Name="pfk_id_inscricao" Type="Int32" Nullable="false" />
+          <Property Name="pres_entrada" Type="Boolean" Nullable="false" />
+          <Property Name="conselho_sentenca" Type="Boolean" Nullable="false" />
+          <Property Name="pres_saida_total" Type="Boolean" Nullable="false" />
+          <Property Name="pres_saida_parcial" Type="Boolean" Nullable="false" />
+          <Property Name="hora_saida_parcial" Type="Time" />
+          <Property Name="horas_certif" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="inscricao" Relationship="Models.fk_presenca_inscricao1" FromRole="presenca" ToRole="inscricao" />
+          <NavigationProperty Name="juri" Relationship="Models.fk_frequencia_juri1" FromRole="presenca" ToRole="juri" />
+        </EntityType>
+        <EntityType Name="processo">
+          <Key>
+            <PropertyRef Name="id_processo" />
+          </Key>
+          <Property Name="id_processo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="num_processo" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="descricao_processo" Type="String" Nullable="false" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="fk_id_juri" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="juri" Relationship="Models.fk_processo_juri1" FromRole="processo" ToRole="juri" />
+          <NavigationProperty Name="ques_absolvicao" Relationship="Models.fk_quesito_absolvicao_processo1" FromRole="processo" ToRole="ques_absolvicao" />
+          <NavigationProperty Name="ques_agravante" Relationship="Models.fk_quesito_agravante_processo1" FromRole="processo" ToRole="ques_agravante" />
+          <NavigationProperty Name="ques_atenuante" Relationship="Models.fk_quesito_atenuante_processo1" FromRole="processo" ToRole="ques_atenuante" />
+          <NavigationProperty Name="ques_autoria" Relationship="Models.fk_quesito_autoria_processo1" FromRole="processo" ToRole="ques_autoria" />
+          <NavigationProperty Name="ques_materialidade" Relationship="Models.fk_quesito_materialidade_processo1" FromRole="processo" ToRole="ques_materialidade" />
+          <NavigationProperty Name="ques_tentativa" Relationship="Models.fk_quesito_tentativa_processo1" FromRole="processo" ToRole="ques_tentativa" />
+          <NavigationProperty Name="reu" Relationship="Models.fk_reu_processo1" FromRole="processo" ToRole="reu" />
+          <NavigationProperty Name="sentenca" Relationship="Models.fk_sentenca_processo1" FromRole="processo" ToRole="sentenca" />
+          <NavigationProperty Name="vitima" Relationship="Models.fk_vitima_processo1" FromRole="processo" ToRole="vitima" />
+        </EntityType>
+        <EntityType Name="ques_absolvicao">
+          <Key>
+            <PropertyRef Name="id_quesito_absolvicao" />
+          </Key>
+          <Property Name="id_quesito_absolvicao" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="quesito_absolvicao" Type="String" Nullable="false" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="qab_sim" Type="Int32" />
+          <Property Name="qab_nao" Type="Int32" />
+          <Property Name="fk_id_processo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="processo" Relationship="Models.fk_quesito_absolvicao_processo1" FromRole="ques_absolvicao" ToRole="processo" />
+        </EntityType>
+        <EntityType Name="ques_agravante">
+          <Key>
+            <PropertyRef Name="id_quesito_agravante" />
+          </Key>
+          <Property Name="id_quesito_agravante" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="quesito_agravante" Type="String" Nullable="false" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="qag_sim" Type="Int32" />
+          <Property Name="qag_nao" Type="Int32" />
+          <Property Name="fk_id_processo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="processo" Relationship="Models.fk_quesito_agravante_processo1" FromRole="ques_agravante" ToRole="processo" />
+        </EntityType>
+        <EntityType Name="ques_atenuante">
+          <Key>
+            <PropertyRef Name="id_quesito_atenuante" />
+          </Key>
+          <Property Name="id_quesito_atenuante" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="quesito_atenuante" Type="String" Nullable="false" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="qat_sim" Type="Int32" />
+          <Property Name="qat_nao" Type="Int32" />
+          <Property Name="fk_id_processo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="processo" Relationship="Models.fk_quesito_atenuante_processo1" FromRole="ques_atenuante" ToRole="processo" />
+        </EntityType>
+        <EntityType Name="ques_autoria">
+          <Key>
+            <PropertyRef Name="id_quesito_autoria" />
+          </Key>
+          <Property Name="id_quesito_autoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="quesito_autoria" Type="String" Nullable="false" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="qa_sim" Type="Int32" />
+          <Property Name="qa_nao" Type="Int32" />
+          <Property Name="fk_id_processo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="processo" Relationship="Models.fk_quesito_autoria_processo1" FromRole="ques_autoria" ToRole="processo" />
+        </EntityType>
+        <EntityType Name="ques_materialidade">
+          <Key>
+            <PropertyRef Name="id_quesito_materialidade" />
+          </Key>
+          <Property Name="id_quesito_materialidade" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="quesito_materialidade" Type="String" Nullable="false" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="qm_sim" Type="Int32" />
+          <Property Name="qm_nao" Type="Int32" />
+          <Property Name="fk_id_processo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="processo" Relationship="Models.fk_quesito_materialidade_processo1" FromRole="ques_materialidade" ToRole="processo" />
+        </EntityType>
+        <EntityType Name="ques_tentativa">
+          <Key>
+            <PropertyRef Name="id_quesito_tentativa" />
+          </Key>
+          <Property Name="id_quesito_tentativa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="quesito_tentativa" Type="String" Nullable="false" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="qt_sim" Type="Int32" />
+          <Property Name="qt_nao" Type="Int32" />
+          <Property Name="fk_id_processo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="processo" Relationship="Models.fk_quesito_tentativa_processo1" FromRole="ques_tentativa" ToRole="processo" />
+        </EntityType>
+        <EntityType Name="reu">
+          <Key>
+            <PropertyRef Name="id_reu" />
+          </Key>
+          <Property Name="id_reu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome_reu" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="fk_id_processo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="processo" Relationship="Models.fk_reu_processo1" FromRole="reu" ToRole="processo" />
+        </EntityType>
+        <EntityType Name="sentenca">
+          <Key>
+            <PropertyRef Name="id_sentenca" />
+          </Key>
+          <Property Name="id_sentenca" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="texto_sentenca" Type="String" Nullable="false" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="fk_id_processo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="processo" Relationship="Models.fk_sentenca_processo1" FromRole="sentenca" ToRole="processo" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome_completo" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="cpf_usuario" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="senha_usuario" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="email_usuario" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="num_matric_aluno" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="periodo_aluno" Type="Int32" />
+          <Property Name="telefone_usuario" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="fk_id_perfil" Type="Int32" Nullable="false" />
+          <Property Name="fk_id_faculdade" Type="Int32" Nullable="false" />
+          <Property Name="fk_id_curso" Type="Int32" />
+          <NavigationProperty Name="curso" Relationship="Models.fk_usuario_curso2" FromRole="usuario" ToRole="curso" />
+          <NavigationProperty Name="faculdade" Relationship="Models.fk_usuario_faculdade1" FromRole="usuario" ToRole="faculdade" />
+          <NavigationProperty Name="inscricao" Relationship="Models.fk_inscricao_usuario1" FromRole="usuario" ToRole="inscricao" />
+          <NavigationProperty Name="perfil" Relationship="Models.fk_usuario_perfil1" FromRole="usuario" ToRole="perfil" />
+        </EntityType>
+        <EntityType Name="vitima">
+          <Key>
+            <PropertyRef Name="id_vitima" />
+          </Key>
+          <Property Name="id_vitima" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome_vitima" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="fk_id_processo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="processo" Relationship="Models.fk_vitima_processo1" FromRole="vitima" ToRole="processo" />
+        </EntityType>
+        <EntityType Name="vgerarcertificado">
+          <Key>
+            <PropertyRef Name="id_juri" />
+            <PropertyRef Name="id_presenca" />
+            <PropertyRef Name="id_usuario" />
+            <PropertyRef Name="nome_aluno" />
+            <PropertyRef Name="cpf_usuario" />
+            <PropertyRef Name="nome_funcao" />
+            <PropertyRef Name="nome_juri" />
+            <PropertyRef Name="local_juri" />
+            <PropertyRef Name="data_hora_juri" />
+          </Key>
+          <Property Name="id_juri" Type="Int32" Nullable="false" />
+          <Property Name="id_presenca" Type="Int32" Nullable="false" />
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="nome_aluno" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="cpf_usuario" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="nome_funcao" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="nome_juri" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="local_juri" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="data_hora_juri" Type="DateTime" Nullable="false" />
+          <Property Name="horas_certif" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vhistoricojuri">
+          <Key>
+            <PropertyRef Name="id_juri" />
+            <PropertyRef Name="nome_juri" />
+            <PropertyRef Name="data_hora_juri" />
+            <PropertyRef Name="local_juri" />
+            <PropertyRef Name="juri_ativo" />
+            <PropertyRef Name="inscricao_sorteada" />
+            <PropertyRef Name="nome_aluno" />
+            <PropertyRef Name="nome_curso" />
+            <PropertyRef Name="nome_funcao" />
+            <PropertyRef Name="id_processo" />
+            <PropertyRef Name="num_processo" />
+            <PropertyRef Name="descricao_processo" />
+            <PropertyRef Name="texto_sentenca" />
+          </Key>
+          <Property Name="id_juri" Type="Int32" Nullable="false" />
+          <Property Name="nome_juri" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="data_hora_juri" Type="DateTime" Nullable="false" />
+          <Property Name="local_juri" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="juri_ativo" Type="Boolean" Nullable="false" />
+          <Property Name="inscricao_sorteada" Type="Boolean" Nullable="false" />
+          <Property Name="nome_aluno" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="nome_curso" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="nome_funcao" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="id_processo" Type="Int32" Nullable="false" />
+          <Property Name="num_processo" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="descricao_processo" Type="String" Nullable="false" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="texto_sentenca" Type="String" Nullable="false" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vlistadepresenca">
+          <Key>
+            <PropertyRef Name="id_juri" />
+            <PropertyRef Name="nome_juri" />
+            <PropertyRef Name="nome_aluno" />
+            <PropertyRef Name="nome_curso" />
+            <PropertyRef Name="nome_funcao" />
+            <PropertyRef Name="pres_entrada" />
+            <PropertyRef Name="conselho_sentenca" />
+            <PropertyRef Name="pres_saida_total" />
+            <PropertyRef Name="pres_saida_parcial" />
+          </Key>
+          <Property Name="id_juri" Type="Int32" Nullable="false" />
+          <Property Name="nome_juri" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="nome_aluno" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="nome_curso" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="periodo_aluno" Type="Int32" />
+          <Property Name="nome_funcao" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="pres_entrada" Type="Boolean" Nullable="false" />
+          <Property Name="conselho_sentenca" Type="Boolean" Nullable="false" />
+          <Property Name="pres_saida_total" Type="Boolean" Nullable="false" />
+          <Property Name="pres_saida_parcial" Type="Boolean" Nullable="false" />
+          <Property Name="hora_saida_parcial" Type="Time" />
+        </EntityType>
+        <EntityType Name="vsorteiofuncoes">
+          <Key>
+            <PropertyRef Name="id_juri" />
+            <PropertyRef Name="nome_aluno" />
+            <PropertyRef Name="nome_curso" />
+            <PropertyRef Name="nome_funcao" />
+          </Key>
+          <Property Name="id_juri" Type="Int32" Nullable="false" />
+          <Property Name="nome_aluno" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="num_matric_aluno" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="nome_curso" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="periodo_aluno" Type="Int32" />
+          <Property Name="nome_funcao" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="fk_curso_faculdade1">
+          <End Type="Models.faculdade" Role="faculdade" Multiplicity="1" />
+          <End Type="Models.curso" Role="curso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="faculdade">
+              <PropertyRef Name="id_faculdade" />
+            </Principal>
+            <Dependent Role="curso">
+              <PropertyRef Name="fk_id_faculdade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario_curso2">
+          <End Type="Models.curso" Role="curso" Multiplicity="0..1" />
+          <End Type="Models.usuario" Role="usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="curso">
+              <PropertyRef Name="id_curso" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="fk_id_curso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_documento_juri1">
+          <End Type="Models.juri" Role="juri" Multiplicity="1" />
+          <End Type="Models.documento" Role="documento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="juri">
+              <PropertyRef Name="id_juri" />
+            </Principal>
+            <Dependent Role="documento">
+              <PropertyRef Name="fk_id_juri" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_npj_faculdade1">
+          <End Type="Models.faculdade" Role="faculdade" Multiplicity="1" />
+          <End Type="Models.npj" Role="npj" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="faculdade">
+              <PropertyRef Name="id_faculdade" />
+            </Principal>
+            <Dependent Role="npj">
+              <PropertyRef Name="fk_id_faculdade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario_faculdade1">
+          <End Type="Models.faculdade" Role="faculdade" Multiplicity="1" />
+          <End Type="Models.usuario" Role="usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="faculdade">
+              <PropertyRef Name="id_faculdade" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="fk_id_faculdade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_foto_juri1">
+          <End Type="Models.juri" Role="juri" Multiplicity="1" />
+          <End Type="Models.foto" Role="foto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="juri">
+              <PropertyRef Name="id_juri" />
+            </Principal>
+            <Dependent Role="foto">
+              <PropertyRef Name="fk_id_juri" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_inscricao_funcao1">
+          <End Type="Models.funcao" Role="funcao" Multiplicity="1" />
+          <End Type="Models.inscricao" Role="inscricao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="funcao">
+              <PropertyRef Name="id_funcao" />
+            </Principal>
+            <Dependent Role="inscricao">
+              <PropertyRef Name="fk_id_funcao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_inscricao_juri1">
+          <End Type="Models.juri" Role="juri" Multiplicity="1" />
+          <End Type="Models.inscricao" Role="inscricao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="juri">
+              <PropertyRef Name="id_juri" />
+            </Principal>
+            <Dependent Role="inscricao">
+              <PropertyRef Name="fk_id_juri" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_inscricao_usuario1">
+          <End Type="Models.usuario" Role="usuario" Multiplicity="1" />
+          <End Type="Models.inscricao" Role="inscricao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="inscricao">
+              <PropertyRef Name="pfk_id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_presenca_inscricao1">
+          <End Type="Models.inscricao" Role="inscricao" Multiplicity="1" />
+          <End Type="Models.presenca" Role="presenca" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="inscricao">
+              <PropertyRef Name="id_inscricao" />
+            </Principal>
+            <Dependent Role="presenca">
+              <PropertyRef Name="pfk_id_inscricao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_frequencia_juri1">
+          <End Type="Models.juri" Role="juri" Multiplicity="1" />
+          <End Type="Models.presenca" Role="presenca" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="juri">
+              <PropertyRef Name="id_juri" />
+            </Principal>
+            <Dependent Role="presenca">
+              <PropertyRef Name="pfk_id_juri" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_juri_npj1">
+          <End Type="Models.npj" Role="npj" Multiplicity="1" />
+          <End Type="Models.juri" Role="juri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="npj">
+              <PropertyRef Name="id_npj" />
+            </Principal>
+            <Dependent Role="juri">
+              <PropertyRef Name="fk_id_npj" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_processo_juri1">
+          <End Type="Models.juri" Role="juri" Multiplicity="1" />
+          <End Type="Models.processo" Role="processo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="juri">
+              <PropertyRef Name="id_juri" />
+            </Principal>
+            <Dependent Role="processo">
+              <PropertyRef Name="fk_id_juri" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario_perfil1">
+          <End Type="Models.perfil" Role="perfil" Multiplicity="1" />
+          <End Type="Models.usuario" Role="usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="perfil">
+              <PropertyRef Name="id_perfil" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="fk_id_perfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_quesito_absolvicao_processo1">
+          <End Type="Models.processo" Role="processo" Multiplicity="1" />
+          <End Type="Models.ques_absolvicao" Role="ques_absolvicao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="processo">
+              <PropertyRef Name="id_processo" />
+            </Principal>
+            <Dependent Role="ques_absolvicao">
+              <PropertyRef Name="fk_id_processo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_quesito_agravante_processo1">
+          <End Type="Models.processo" Role="processo" Multiplicity="1" />
+          <End Type="Models.ques_agravante" Role="ques_agravante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="processo">
+              <PropertyRef Name="id_processo" />
+            </Principal>
+            <Dependent Role="ques_agravante">
+              <PropertyRef Name="fk_id_processo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_quesito_atenuante_processo1">
+          <End Type="Models.processo" Role="processo" Multiplicity="1" />
+          <End Type="Models.ques_atenuante" Role="ques_atenuante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="processo">
+              <PropertyRef Name="id_processo" />
+            </Principal>
+            <Dependent Role="ques_atenuante">
+              <PropertyRef Name="fk_id_processo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_quesito_autoria_processo1">
+          <End Type="Models.processo" Role="processo" Multiplicity="1" />
+          <End Type="Models.ques_autoria" Role="ques_autoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="processo">
+              <PropertyRef Name="id_processo" />
+            </Principal>
+            <Dependent Role="ques_autoria">
+              <PropertyRef Name="fk_id_processo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_quesito_materialidade_processo1">
+          <End Type="Models.processo" Role="processo" Multiplicity="1" />
+          <End Type="Models.ques_materialidade" Role="ques_materialidade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="processo">
+              <PropertyRef Name="id_processo" />
+            </Principal>
+            <Dependent Role="ques_materialidade">
+              <PropertyRef Name="fk_id_processo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_quesito_tentativa_processo1">
+          <End Type="Models.processo" Role="processo" Multiplicity="1" />
+          <End Type="Models.ques_tentativa" Role="ques_tentativa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="processo">
+              <PropertyRef Name="id_processo" />
+            </Principal>
+            <Dependent Role="ques_tentativa">
+              <PropertyRef Name="fk_id_processo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_reu_processo1">
+          <End Type="Models.processo" Role="processo" Multiplicity="1" />
+          <End Type="Models.reu" Role="reu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="processo">
+              <PropertyRef Name="id_processo" />
+            </Principal>
+            <Dependent Role="reu">
+              <PropertyRef Name="fk_id_processo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_sentenca_processo1">
+          <End Type="Models.processo" Role="processo" Multiplicity="1" />
+          <End Type="Models.sentenca" Role="sentenca" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="processo">
+              <PropertyRef Name="id_processo" />
+            </Principal>
+            <Dependent Role="sentenca">
+              <PropertyRef Name="fk_id_processo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_vitima_processo1">
+          <End Type="Models.processo" Role="processo" Multiplicity="1" />
+          <End Type="Models.vitima" Role="vitima" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="processo">
+              <PropertyRef Name="id_processo" />
+            </Principal>
+            <Dependent Role="vitima">
+              <PropertyRef Name="fk_id_processo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="DataModel">
+          <EntitySetMapping Name="curso">
+            <EntityTypeMapping TypeName="Models.curso">
+              <MappingFragment StoreEntitySet="curso">
+                <ScalarProperty Name="fk_id_faculdade" ColumnName="fk_id_faculdade" />
+                <ScalarProperty Name="descricao_curso" ColumnName="descricao_curso" />
+                <ScalarProperty Name="nome_curso" ColumnName="nome_curso" />
+                <ScalarProperty Name="id_curso" ColumnName="id_curso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="documento">
+            <EntityTypeMapping TypeName="Models.documento">
+              <MappingFragment StoreEntitySet="documento">
+                <ScalarProperty Name="fk_id_juri" ColumnName="fk_id_juri" />
+                <ScalarProperty Name="path" ColumnName="path" />
+                <ScalarProperty Name="nome_documento" ColumnName="nome_documento" />
+                <ScalarProperty Name="id_documento" ColumnName="id_documento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="faculdade">
+            <EntityTypeMapping TypeName="Models.faculdade">
+              <MappingFragment StoreEntitySet="faculdade">
+                <ScalarProperty Name="endereco_faculdade" ColumnName="endereco_faculdade" />
+                <ScalarProperty Name="cnpj_faculdade" ColumnName="cnpj_faculdade" />
+                <ScalarProperty Name="telefone_faculdade" ColumnName="telefone_faculdade" />
+                <ScalarProperty Name="nome_faculdade" ColumnName="nome_faculdade" />
+                <ScalarProperty Name="id_faculdade" ColumnName="id_faculdade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="foto">
+            <EntityTypeMapping TypeName="Models.foto">
+              <MappingFragment StoreEntitySet="foto">
+                <ScalarProperty Name="fk_id_juri" ColumnName="fk_id_juri" />
+                <ScalarProperty Name="path" ColumnName="path" />
+                <ScalarProperty Name="id_foto" ColumnName="id_foto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="funcao">
+            <EntityTypeMapping TypeName="Models.funcao">
+              <MappingFragment StoreEntitySet="funcao">
+                <ScalarProperty Name="descricao_funcao" ColumnName="descricao_funcao" />
+                <ScalarProperty Name="nome_funcao" ColumnName="nome_funcao" />
+                <ScalarProperty Name="id_funcao" ColumnName="id_funcao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="inscricao">
+            <EntityTypeMapping TypeName="Models.inscricao">
+              <MappingFragment StoreEntitySet="inscricao">
+                <ScalarProperty Name="fk_id_juri" ColumnName="fk_id_juri" />
+                <ScalarProperty Name="fk_id_funcao" ColumnName="fk_id_funcao" />
+                <ScalarProperty Name="inscricao_sorteada" ColumnName="inscricao_sorteada" />
+                <ScalarProperty Name="status_inscricao" ColumnName="status_inscricao" />
+                <ScalarProperty Name="pfk_id_usuario" ColumnName="pfk_id_usuario" />
+                <ScalarProperty Name="id_inscricao" ColumnName="id_inscricao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="juri">
+            <EntityTypeMapping TypeName="Models.juri">
+              <MappingFragment StoreEntitySet="juri">
+                <ScalarProperty Name="fk_id_npj" ColumnName="fk_id_npj" />
+                <ScalarProperty Name="juri_sorteado" ColumnName="juri_sorteado" />
+                <ScalarProperty Name="juri_ativo" ColumnName="juri_ativo" />
+                <ScalarProperty Name="local_juri" ColumnName="local_juri" />
+                <ScalarProperty Name="data_hora_juri" ColumnName="data_hora_juri" />
+                <ScalarProperty Name="nome_juri" ColumnName="nome_juri" />
+                <ScalarProperty Name="id_juri" ColumnName="id_juri" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="npj">
+            <EntityTypeMapping TypeName="Models.npj">
+              <MappingFragment StoreEntitySet="npj">
+                <ScalarProperty Name="fk_id_faculdade" ColumnName="fk_id_faculdade" />
+                <ScalarProperty Name="endereco_npj" ColumnName="endereco_npj" />
+                <ScalarProperty Name="cnpj_npj" ColumnName="cnpj_npj" />
+                <ScalarProperty Name="telefone_npj" ColumnName="telefone_npj" />
+                <ScalarProperty Name="nome_npj" ColumnName="nome_npj" />
+                <ScalarProperty Name="id_npj" ColumnName="id_npj" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="perfil">
+            <EntityTypeMapping TypeName="Models.perfil">
+              <MappingFragment StoreEntitySet="perfil">
+                <ScalarProperty Name="descricao_perfil" ColumnName="descricao_perfil" />
+                <ScalarProperty Name="nome_perfil" ColumnName="nome_perfil" />
+                <ScalarProperty Name="id_perfil" ColumnName="id_perfil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="presenca">
+            <EntityTypeMapping TypeName="Models.presenca">
+              <MappingFragment StoreEntitySet="presenca">
+                <ScalarProperty Name="horas_certif" ColumnName="horas_certif" />
+                <ScalarProperty Name="hora_saida_parcial" ColumnName="hora_saida_parcial" />
+                <ScalarProperty Name="pres_saida_parcial" ColumnName="pres_saida_parcial" />
+                <ScalarProperty Name="pres_saida_total" ColumnName="pres_saida_total" />
+                <ScalarProperty Name="conselho_sentenca" ColumnName="conselho_sentenca" />
+                <ScalarProperty Name="pres_entrada" ColumnName="pres_entrada" />
+                <ScalarProperty Name="pfk_id_inscricao" ColumnName="pfk_id_inscricao" />
+                <ScalarProperty Name="pfk_id_juri" ColumnName="pfk_id_juri" />
+                <ScalarProperty Name="id_presenca" ColumnName="id_presenca" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="processo">
+            <EntityTypeMapping TypeName="Models.processo">
+              <MappingFragment StoreEntitySet="processo">
+                <ScalarProperty Name="fk_id_juri" ColumnName="fk_id_juri" />
+                <ScalarProperty Name="descricao_processo" ColumnName="descricao_processo" />
+                <ScalarProperty Name="num_processo" ColumnName="num_processo" />
+                <ScalarProperty Name="id_processo" ColumnName="id_processo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ques_absolvicao">
+            <EntityTypeMapping TypeName="Models.ques_absolvicao">
+              <MappingFragment StoreEntitySet="ques_absolvicao">
+                <ScalarProperty Name="fk_id_processo" ColumnName="fk_id_processo" />
+                <ScalarProperty Name="qab_nao" ColumnName="qab_nao" />
+                <ScalarProperty Name="qab_sim" ColumnName="qab_sim" />
+                <ScalarProperty Name="quesito_absolvicao" ColumnName="quesito_absolvicao" />
+                <ScalarProperty Name="id_quesito_absolvicao" ColumnName="id_quesito_absolvicao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ques_agravante">
+            <EntityTypeMapping TypeName="Models.ques_agravante">
+              <MappingFragment StoreEntitySet="ques_agravante">
+                <ScalarProperty Name="fk_id_processo" ColumnName="fk_id_processo" />
+                <ScalarProperty Name="qag_nao" ColumnName="qag_nao" />
+                <ScalarProperty Name="qag_sim" ColumnName="qag_sim" />
+                <ScalarProperty Name="quesito_agravante" ColumnName="quesito_agravante" />
+                <ScalarProperty Name="id_quesito_agravante" ColumnName="id_quesito_agravante" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ques_atenuante">
+            <EntityTypeMapping TypeName="Models.ques_atenuante">
+              <MappingFragment StoreEntitySet="ques_atenuante">
+                <ScalarProperty Name="fk_id_processo" ColumnName="fk_id_processo" />
+                <ScalarProperty Name="qat_nao" ColumnName="qat_nao" />
+                <ScalarProperty Name="qat_sim" ColumnName="qat_sim" />
+                <ScalarProperty Name="quesito_atenuante" ColumnName="quesito_atenuante" />
+                <ScalarProperty Name="id_quesito_atenuante" ColumnName="id_quesito_atenuante" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ques_autoria">
+            <EntityTypeMapping TypeName="Models.ques_autoria">
+              <MappingFragment StoreEntitySet="ques_autoria">
+                <ScalarProperty Name="fk_id_processo" ColumnName="fk_id_processo" />
+                <ScalarProperty Name="qa_nao" ColumnName="qa_nao" />
+                <ScalarProperty Name="qa_sim" ColumnName="qa_sim" />
+                <ScalarProperty Name="quesito_autoria" ColumnName="quesito_autoria" />
+                <ScalarProperty Name="id_quesito_autoria" ColumnName="id_quesito_autoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ques_materialidade">
+            <EntityTypeMapping TypeName="Models.ques_materialidade">
+              <MappingFragment StoreEntitySet="ques_materialidade">
+                <ScalarProperty Name="fk_id_processo" ColumnName="fk_id_processo" />
+                <ScalarProperty Name="qm_nao" ColumnName="qm_nao" />
+                <ScalarProperty Name="qm_sim" ColumnName="qm_sim" />
+                <ScalarProperty Name="quesito_materialidade" ColumnName="quesito_materialidade" />
+                <ScalarProperty Name="id_quesito_materialidade" ColumnName="id_quesito_materialidade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ques_tentativa">
+            <EntityTypeMapping TypeName="Models.ques_tentativa">
+              <MappingFragment StoreEntitySet="ques_tentativa">
+                <ScalarProperty Name="fk_id_processo" ColumnName="fk_id_processo" />
+                <ScalarProperty Name="qt_nao" ColumnName="qt_nao" />
+                <ScalarProperty Name="qt_sim" ColumnName="qt_sim" />
+                <ScalarProperty Name="quesito_tentativa" ColumnName="quesito_tentativa" />
+                <ScalarProperty Name="id_quesito_tentativa" ColumnName="id_quesito_tentativa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="reu">
+            <EntityTypeMapping TypeName="Models.reu">
+              <MappingFragment StoreEntitySet="reu">
+                <ScalarProperty Name="fk_id_processo" ColumnName="fk_id_processo" />
+                <ScalarProperty Name="nome_reu" ColumnName="nome_reu" />
+                <ScalarProperty Name="id_reu" ColumnName="id_reu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sentenca">
+            <EntityTypeMapping TypeName="Models.sentenca">
+              <MappingFragment StoreEntitySet="sentenca">
+                <ScalarProperty Name="fk_id_processo" ColumnName="fk_id_processo" />
+                <ScalarProperty Name="texto_sentenca" ColumnName="texto_sentenca" />
+                <ScalarProperty Name="id_sentenca" ColumnName="id_sentenca" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuario">
+            <EntityTypeMapping TypeName="Models.usuario">
+              <MappingFragment StoreEntitySet="usuario">
+                <ScalarProperty Name="fk_id_curso" ColumnName="fk_id_curso" />
+                <ScalarProperty Name="fk_id_faculdade" ColumnName="fk_id_faculdade" />
+                <ScalarProperty Name="fk_id_perfil" ColumnName="fk_id_perfil" />
+                <ScalarProperty Name="telefone_usuario" ColumnName="telefone_usuario" />
+                <ScalarProperty Name="periodo_aluno" ColumnName="periodo_aluno" />
+                <ScalarProperty Name="num_matric_aluno" ColumnName="num_matric_aluno" />
+                <ScalarProperty Name="email_usuario" ColumnName="email_usuario" />
+                <ScalarProperty Name="senha_usuario" ColumnName="senha_usuario" />
+                <ScalarProperty Name="cpf_usuario" ColumnName="cpf_usuario" />
+                <ScalarProperty Name="nome_completo" ColumnName="nome_completo" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vitima">
+            <EntityTypeMapping TypeName="Models.vitima">
+              <MappingFragment StoreEntitySet="vitima">
+                <ScalarProperty Name="fk_id_processo" ColumnName="fk_id_processo" />
+                <ScalarProperty Name="nome_vitima" ColumnName="nome_vitima" />
+                <ScalarProperty Name="id_vitima" ColumnName="id_vitima" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vgerarcertificado">
+            <EntityTypeMapping TypeName="Models.vgerarcertificado">
+              <MappingFragment StoreEntitySet="vgerarcertificado">
+                <ScalarProperty Name="horas_certif" ColumnName="horas_certif" />
+                <ScalarProperty Name="data_hora_juri" ColumnName="data_hora_juri" />
+                <ScalarProperty Name="local_juri" ColumnName="local_juri" />
+                <ScalarProperty Name="nome_juri" ColumnName="nome_juri" />
+                <ScalarProperty Name="nome_funcao" ColumnName="nome_funcao" />
+                <ScalarProperty Name="cpf_usuario" ColumnName="cpf_usuario" />
+                <ScalarProperty Name="nome_aluno" ColumnName="nome_aluno" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="id_presenca" ColumnName="id_presenca" />
+                <ScalarProperty Name="id_juri" ColumnName="id_juri" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vhistoricojuri">
+            <EntityTypeMapping TypeName="Models.vhistoricojuri">
+              <MappingFragment StoreEntitySet="vhistoricojuri">
+                <ScalarProperty Name="texto_sentenca" ColumnName="texto_sentenca" />
+                <ScalarProperty Name="descricao_processo" ColumnName="descricao_processo" />
+                <ScalarProperty Name="num_processo" ColumnName="num_processo" />
+                <ScalarProperty Name="id_processo" ColumnName="id_processo" />
+                <ScalarProperty Name="nome_funcao" ColumnName="nome_funcao" />
+                <ScalarProperty Name="nome_curso" ColumnName="nome_curso" />
+                <ScalarProperty Name="nome_aluno" ColumnName="nome_aluno" />
+                <ScalarProperty Name="inscricao_sorteada" ColumnName="inscricao_sorteada" />
+                <ScalarProperty Name="juri_ativo" ColumnName="juri_ativo" />
+                <ScalarProperty Name="local_juri" ColumnName="local_juri" />
+                <ScalarProperty Name="data_hora_juri" ColumnName="data_hora_juri" />
+                <ScalarProperty Name="nome_juri" ColumnName="nome_juri" />
+                <ScalarProperty Name="id_juri" ColumnName="id_juri" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vlistadepresenca">
+            <EntityTypeMapping TypeName="Models.vlistadepresenca">
+              <MappingFragment StoreEntitySet="vlistadepresenca">
+                <ScalarProperty Name="hora_saida_parcial" ColumnName="hora_saida_parcial" />
+                <ScalarProperty Name="pres_saida_parcial" ColumnName="pres_saida_parcial" />
+                <ScalarProperty Name="pres_saida_total" ColumnName="pres_saida_total" />
+                <ScalarProperty Name="conselho_sentenca" ColumnName="conselho_sentenca" />
+                <ScalarProperty Name="pres_entrada" ColumnName="pres_entrada" />
+                <ScalarProperty Name="nome_funcao" ColumnName="nome_funcao" />
+                <ScalarProperty Name="periodo_aluno" ColumnName="periodo_aluno" />
+                <ScalarProperty Name="nome_curso" ColumnName="nome_curso" />
+                <ScalarProperty Name="nome_aluno" ColumnName="nome_aluno" />
+                <ScalarProperty Name="nome_juri" ColumnName="nome_juri" />
+                <ScalarProperty Name="id_juri" ColumnName="id_juri" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vsorteiofuncoes">
+            <EntityTypeMapping TypeName="Models.vsorteiofuncoes">
+              <MappingFragment StoreEntitySet="vsorteiofuncoes">
+                <ScalarProperty Name="nome_funcao" ColumnName="nome_funcao" />
+                <ScalarProperty Name="periodo_aluno" ColumnName="periodo_aluno" />
+                <ScalarProperty Name="nome_curso" ColumnName="nome_curso" />
+                <ScalarProperty Name="num_matric_aluno" ColumnName="num_matric_aluno" />
+                <ScalarProperty Name="nome_aluno" ColumnName="nome_aluno" />
+                <ScalarProperty Name="id_juri" ColumnName="id_juri" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

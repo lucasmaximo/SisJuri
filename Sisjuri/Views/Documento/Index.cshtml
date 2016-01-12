@@ -1,0 +1,46 @@
+﻿@model Sisjuri.Models.documento
+
+@{
+    ViewBag.Title = "Pesquisar documentos";
+}
+
+<div class="row">
+    <div class="main-box">
+        <h2>Pesquisar documentos</h2>
+
+        @using (Html.BeginForm("List", "documento"))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.nome_documento, "Nome do documento", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.nome_documento, new { size = 25, maxlength = 45 })
+                        @Html.ValidationMessageFor(model => model.nome_documento)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.fk_id_juri, "Pertence ao", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.fk_id_juri, new SelectList(ViewData["lstJuri"] as System.Collections.IEnumerable, "id_juri", "nome_juri"))
+                        @Html.ValidationMessageFor(model => model.fk_id_juri)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Pesquisar" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+        <div>
+            @Html.ActionLink("Voltar à lista", "List")
+        </div>
+    </div>
+</div>

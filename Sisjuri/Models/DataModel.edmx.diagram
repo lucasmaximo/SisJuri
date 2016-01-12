@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="98e0dbda1e2a4d1db141159aaa0a59b0" Name="Diagram1" ZoomLevel="71">
+        <EntityTypeShape EntityType="Models.curso" Width="1.5" PointX="3" PointY="3.375" />
+        <EntityTypeShape EntityType="Models.documento" Width="1.5" PointX="7.5" PointY="8.875" />
+        <EntityTypeShape EntityType="Models.faculdade" Width="1.5" PointX="0.75" PointY="18.375" />
+        <EntityTypeShape EntityType="Models.foto" Width="1.5" PointX="7.5" PointY="6.375" />
+        <EntityTypeShape EntityType="Models.funcao" Width="1.5" PointX="5.25" PointY="15.75" />
+        <EntityTypeShape EntityType="Models.inscricao" Width="1.5" PointX="7.5" PointY="15.125" />
+        <EntityTypeShape EntityType="Models.juri" Width="1.5" PointX="5.25" PointY="19.375" />
+        <EntityTypeShape EntityType="Models.npj" Width="1.5" PointX="3" PointY="19.875" />
+        <EntityTypeShape EntityType="Models.perfil" Width="1.5" PointX="3" PointY="11.25" />
+        <EntityTypeShape EntityType="Models.presenca" Width="1.5" PointX="12.75" PointY="17.5" />
+        <EntityTypeShape EntityType="Models.processo" Width="1.5" PointX="7.5" PointY="22" />
+        <EntityTypeShape EntityType="Models.ques_absolvicao" Width="1.5" PointX="9.75" PointY="30.875" />
+        <EntityTypeShape EntityType="Models.ques_agravante" Width="1.5" PointX="9.75" PointY="28" />
+        <EntityTypeShape EntityType="Models.ques_atenuante" Width="1.5" PointX="9.75" PointY="22.5" />
+        <EntityTypeShape EntityType="Models.ques_autoria" Width="1.5" PointX="9.75" PointY="11.625" />
+        <EntityTypeShape EntityType="Models.ques_materialidade" Width="1.5" PointX="9.75" PointY="14.5" />
+        <EntityTypeShape EntityType="Models.ques_tentativa" Width="1.5" PointX="9.75" PointY="33.875" />
+        <EntityTypeShape EntityType="Models.reu" Width="1.5" PointX="9.75" PointY="20" />
+        <EntityTypeShape EntityType="Models.sentenca" Width="1.5" PointX="9.75" PointY="25.5" />
+        <EntityTypeShape EntityType="Models.usuario" Width="1.5" PointX="5.25" PointY="10.25" />
+        <EntityTypeShape EntityType="Models.vitima" Width="1.5" PointX="9.75" PointY="17.5" />
+        <EntityTypeShape EntityType="Models.vgerarcertificado" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Models.vhistoricojuri" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="Models.vlistadepresenca" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Models.vsorteiofuncoes" Width="1.5" PointX="2.75" PointY="6.75" />
+        <AssociationConnector Association="Models.fk_curso_faculdade1" />
+        <AssociationConnector Association="Models.fk_usuario_curso2" />
+        <AssociationConnector Association="Models.fk_documento_juri1" />
+        <AssociationConnector Association="Models.fk_npj_faculdade1" />
+        <AssociationConnector Association="Models.fk_usuario_faculdade1" />
+        <AssociationConnector Association="Models.fk_foto_juri1" />
+        <AssociationConnector Association="Models.fk_inscricao_funcao1" />
+        <AssociationConnector Association="Models.fk_inscricao_juri1" />
+        <AssociationConnector Association="Models.fk_inscricao_usuario1" />
+        <AssociationConnector Association="Models.fk_presenca_inscricao1" />
+        <AssociationConnector Association="Models.fk_frequencia_juri1" />
+        <AssociationConnector Association="Models.fk_juri_npj1" />
+        <AssociationConnector Association="Models.fk_processo_juri1" />
+        <AssociationConnector Association="Models.fk_usuario_perfil1" />
+        <AssociationConnector Association="Models.fk_quesito_absolvicao_processo1" />
+        <AssociationConnector Association="Models.fk_quesito_agravante_processo1" />
+        <AssociationConnector Association="Models.fk_quesito_atenuante_processo1" />
+        <AssociationConnector Association="Models.fk_quesito_autoria_processo1" />
+        <AssociationConnector Association="Models.fk_quesito_materialidade_processo1" />
+        <AssociationConnector Association="Models.fk_quesito_tentativa_processo1" />
+        <AssociationConnector Association="Models.fk_reu_processo1" />
+        <AssociationConnector Association="Models.fk_sentenca_processo1" />
+        <AssociationConnector Association="Models.fk_vitima_processo1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

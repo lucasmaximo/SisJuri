@@ -1,0 +1,171 @@
+﻿@model IEnumerable<Sisjuri.Models.processo>
+
+@{
+    ViewBag.Title = "Lista de processos";
+    Sisjuri.Models.usuario user = ((Sisjuri.Models.usuario)Session["usuario"]);    
+}
+
+<div class="row">
+    <div class="main-box">
+
+        <h2>Lista de processos</h2>
+        <p>
+            @Html.ActionLink("Pesquisar processos", "Index") |
+            @{if (user.fk_id_perfil == 1 || user.fk_id_perfil == 2)
+            {
+                @Html.ActionLink("Cadastrar novo processo", "Create")
+            }}
+        </p>
+        <br />
+        @{ if (ViewData["message"] != null && ViewData["message"].ToString() != "")
+         {
+            <div class="alert alert-success fade in">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="fa fa-check-circle fa-fw fa-lg"></i>
+                <strong>@ViewData["message"]</strong>
+            </div>
+         }
+         if (ViewData["messageError"] != null && ViewData["messageError"].ToString() != "")
+         {
+            <div class="alert alert-danger fade in">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="fa fa-times-circle fa-fw fa-lg"></i>
+                <strong>@ViewData["messageError"]</strong>
+            </div>
+         }
+
+        }
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            <span>Nº do processo</span>
+                        </th>
+                        <th>
+                            <span>Descrição</span>
+                        </th>
+                        <th>
+                            <span>Quesitos</span>
+                        </th>
+                        <th>
+                            <span>Envolvidos</span>
+                        </th>
+                        <th>
+                            <span>Sentença</span>
+                        </th>
+                        <th>
+                            <span>Pertence ao</span>
+                        </th>
+                        <th>
+                            <span>Ações</span>
+                        </th>
+                    </tr>
+                </thead>
+
+                @foreach (var item in Model)
+                {
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.num_processo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.descricao_processo)
+                            </td>
+                            <td>
+                                <a title="Quesitos da materialidade" class="table-link ques1" href="@Url.Action("ListByIdProcess", "QuesMaterialidade", new { id = item.id_processo })">
+                                    <span class=" fa-stack">
+                                        <i class="fa fa-square fa-stack-2x"></i>
+                                        <i class="fa fa-cube fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                                <a title="Quesitos da autoria" class="table-link primary" href="@Url.Action("ListByIdProcess", "QuesAutoria", new { id = item.id_processo })">
+                                    <span class=" fa-stack">
+                                        <i class="fa fa-square fa-stack-2x"></i>
+                                        <i class="fa fa-child fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                                <a title="Quesitos da absolvição" class="table-link ques2" href="@Url.Action("ListByIdProcess", "QuesAbsolvicao", new { id = item.id_processo })">
+                                    <span class=" fa-stack">
+                                        <i class="fa fa-square fa-stack-2x"></i>
+                                        <i class="fa fa-unlock-alt fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                                <a title="Quesitos atenuantes" class="table-link ques3" href="@Url.Action("ListByIdProcess", "QuesAtenuante", new { id = item.id_processo })">
+                                    <span class=" fa-stack">
+                                        <i class="fa fa-square fa-stack-2x"></i>
+                                        <i class="fa fa-angle-double-down fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                                <a title="Quesitos agravantes" class="table-link danger" href="@Url.Action("ListByIdProcess", "QuesAgravante", new { id = item.id_processo })">
+                                    <span class=" fa-stack">
+                                        <i class="fa fa-square fa-stack-2x"></i>
+                                        <i class="fa fa-angle-double-up fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                                <a title="Quesitos da tentativa" class="table-link ques4" href="@Url.Action("ListByIdProcess", "QuesTentativa", new { id = item.id_processo })">
+                                    <span class=" fa-stack">
+                                        <i class="fa fa-square fa-stack-2x"></i>
+                                        <i class="fa fa-bolt fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </td>
+                            <td>
+                                <a title="Réus" class="table-link ques1" href="@Url.Action("ListByIdProcess", "Reu", new { id = item.id_processo })">
+                                    <span class=" fa-stack">
+                                        <i class="fa fa-square fa-stack-2x"></i>
+                                        <i class="fa fa-user-secret fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                                <a title="Vítimas" class="table-link primary" href="@Url.Action("ListByIdProcess", "Vitima", new { id = item.id_processo })">
+                                    <span class=" fa-stack">
+                                        <i class="fa fa-square fa-stack-2x"></i>
+                                        <i class="fa fa-users fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </td>
+                            <td>
+                                <a title="Sentença" class="table-link danger" href="@Url.Action("ListByIdProcess", "Sentenca", new { id = item.id_processo })">
+                                    <span class=" fa-stack">
+                                        <i class="fa fa-square fa-stack-2x"></i>
+                                        <i class="fa fa-chain fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.juri.nome_juri)
+                            </td>
+                            <td style="width: 15%;">
+                                <a title="Ver detalhes" class="table-link" href="@Url.Action("Details", "Processo", new { id = item.id_processo })">
+                                    <span class=" fa-stack">
+                                        <i class="fa fa-square fa-stack-2x"></i>
+                                        <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                                @{ if(user.fk_id_perfil == 1 || user.fk_id_perfil == 2)
+                                    {
+                                        <a title="Editar" class="table-link primary" href="@Url.Action("Edit", "Processo", new { id = item.id_processo })">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                        <a title="Excluir" class="table-link danger" href="@Url.Action("Delete", "Processo", new { id = item.id_processo })">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                    }
+                                }
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+            <hr />
+        </div>
+    </div>
+</div>

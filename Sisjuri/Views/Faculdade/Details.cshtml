@@ -1,0 +1,52 @@
+﻿@model Sisjuri.Models.faculdade
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+<div class="row">
+    <div class="main-box">
+        <h2>Detalhes da faculdade</h2>
+        <div>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.LabelFor(model => model.nome_faculdade, "Nome da faculdade")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.nome_faculdade)
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.cnpj_faculdade, "CNPJ")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.cnpj_faculdade)
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.endereco_faculdade, "Endereço")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.endereco_faculdade)
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.telefone_faculdade, "Telefone")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.telefone_faculdade)
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Editar", "Edit", new { id = Model.id_faculdade }) |
+            @Html.ActionLink("Voltar à lista", "List")
+        </p>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+﻿@model Sisjuri.Models.usuario
+
+@{
+    ViewBag.Title = "Excluir usuário";
+}
+
+<div class="row">
+    <div class="main-box">
+        <h2>Tem certeza que deseja excluir este usuário?</h2>
+        <div>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.LabelFor(model => model.nome_completo, "Nome completo")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.nome_completo)
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.cpf_usuario, "CPF")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.cpf_usuario)
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.email_usuario, "E-mail")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.email_usuario)
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.telefone_usuario, "Telefone")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.telefone_usuario)
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.faculdade.nome_faculdade, "Faculdade")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.faculdade.nome_faculdade)
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.perfil.nome_perfil, "Perfil")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.perfil.nome_perfil)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                 <div class="form-actions no-color">
+                    <input type="submit" value="Excluir" class="btn btn-default" /> |
+                    @Html.ActionLink("Voltar à lista", "List")
+                </div>
+            }
+        </div>
+    </div>
+</div>

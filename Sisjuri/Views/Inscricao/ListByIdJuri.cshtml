@@ -1,0 +1,131 @@
+﻿@model IEnumerable<Sisjuri.Models.inscricao>
+
+@{
+    ViewBag.Title = "Lista de inscrições";
+    Sisjuri.Models.usuario user = ((Sisjuri.Models.usuario)Session["usuario"]);    
+}
+
+<div class="row">
+    <div class="main-box">
+
+        <h2>Lista de inscrições no júri simulado</h2>
+        <p>
+            @Html.ActionLink("Pesquisar inscrições", "Index")
+        </p>
+        <br />
+        @{ if (ViewData["message"] != null && ViewData["message"].ToString() != "")
+         {
+            <div class="alert alert-success fade in">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="fa fa-check-circle fa-fw fa-lg"></i>
+                <strong>@ViewData["message"]</strong>
+            </div>
+         }
+         if (ViewData["messageError"] != null && ViewData["messageError"].ToString() != "")
+         {
+            <div class="alert alert-danger fade in">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="fa fa-times-circle fa-fw fa-lg"></i>
+                <strong>@ViewData["messageError"]</strong>
+            </div>
+         }
+
+        }
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            <span>Nome do participante</span>
+                        </th>
+                        <th>
+                            <span>Nº da matrícula</span>
+                        </th>
+                        <th>
+                            <span>Curso</span>
+                        </th>
+                        <th>
+                            <span>Período</span>
+                        </th>
+                        <th>
+                            <span>Status da inscrição</span>
+                        </th>
+                        <th>
+                            <span>Função</span>
+                        </th>
+                        <th>
+                            <span>Ações</span>
+                        </th>
+                    </tr>
+                </thead>
+
+                @foreach (var item in Model)
+                {
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.usuario.nome_completo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.usuario.num_matric_aluno)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.usuario.curso.nome_curso)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.usuario.periodo_aluno)@{if (item.usuario.fk_id_perfil == 4){<span>º período</span>  } }
+                            </td>
+                            <td>
+                                @{
+                                    if (item.status_inscricao.Equals("Autorizada"))
+                                    {
+                                            <span class="label label-success">@Html.DisplayFor(modelItem => item.status_inscricao)</span>
+                                    }
+                                    if (item.status_inscricao.Equals("Pendente"))
+                                    {
+                                            <span class="label label-warning">@Html.DisplayFor(modelItem => item.status_inscricao)</span>
+                                    }
+                                    if (item.status_inscricao.Equals("Recusada"))
+                                    {
+                                            <span class="label label-danger">@Html.DisplayFor(modelItem => item.status_inscricao)</span>
+                                    }
+                                }
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.funcao.nome_funcao)
+                            </td>
+                            <td style="width: 15%;">
+                                <a title="Ver detalhes" class="table-link" href="@Url.Action("Details", "Inscricao", new { id = item.id_inscricao })">
+                                    <span class=" fa-stack">
+                                        <i class="fa fa-square fa-stack-2x"></i>
+                                        <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                                @{ if (user.fk_id_perfil == 1 || user.fk_id_perfil == 2)
+                                 {
+                                    <a title="Editar" class="table-link primary" href="@Url.Action("Edit", "Inscricao", new { id = item.id_inscricao })">
+                                        <span class="fa-stack">
+                                            <i class="fa fa-square fa-stack-2x"></i>
+                                            <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                    <a title="Excluir" class="table-link danger" href="@Url.Action("Delete", "Inscricao", new { id = item.id_inscricao })">
+                                        <span class="fa-stack">
+                                            <i class="fa fa-square fa-stack-2x"></i>
+                                            <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                 }
+                                }
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+            <hr />
+            <div>
+                @Html.ActionLink("Voltar à lista de júris simulados", "List", "Juri")
+            </div>
+        </div>
+    </div>
+</div>

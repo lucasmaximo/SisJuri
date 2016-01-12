@@ -1,0 +1,90 @@
+﻿@model Sisjuri.Models.inscricao
+
+@{
+    ViewBag.Title = "Fazer inscrição em júri simulado";
+    Sisjuri.Models.usuario user = ((Sisjuri.Models.usuario)Session["usuario"]);
+}
+
+<div class="row">
+    <div class="main-box">
+        <h2>Inscrever-se em júri simulado</h2>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <hr />
+
+                @Html.ValidationSummary(true)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.fk_id_juri, "Inscrever-se no", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.fk_id_juri, new SelectList(ViewData["lstJuriToInscricao"] as System.Collections.IEnumerable, "id_juri", "nome_juri"))
+                        @Html.ValidationMessageFor(model => model.fk_id_juri)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => user.nome_completo, "Nome do participante", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DisplayFor(model => user.nome_completo)
+                        @Html.ValidationMessageFor(model => user.nome_completo)
+                    </div>
+                </div>
+
+                @{if (user.perfil.nome_perfil == "Aluno")
+                  {
+                    <div class="form-group">
+                        @Html.LabelFor(model => user.num_matric_aluno, "Nº da matrícula", new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DisplayFor(model => user.num_matric_aluno, new { size = 15, maxlength = 15 })
+                            @Html.ValidationMessageFor(model => user.num_matric_aluno)
+                        </div>
+                    </div>
+                      
+                    <div class="form-group">
+                        @Html.LabelFor(model => user.curso.nome_curso, "Curso", new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DisplayFor(model => user.curso.nome_curso)
+                            @Html.ValidationMessageFor(model => user.curso.nome_curso)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => user.periodo_aluno, "Período do aluno", new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DisplayFor(model => user.periodo_aluno, new { size = 3, maxlength = 3 })º período
+                            @Html.ValidationMessageFor(model => user.periodo_aluno)
+                        </div>
+                    </div>
+                  }
+                    
+                }
+
+                @{if (user.perfil.nome_perfil == "Aluno")
+                  {
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.fk_id_funcao, "Função", new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.fk_id_funcao, new SelectList(ViewData["lstFuncao"] as System.Collections.IEnumerable, "id_funcao", "nome_funcao"))
+                            @Html.ValidationMessageFor(model => model.fk_id_funcao)
+                        </div>
+                    </div>
+                  }
+                }
+                
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Fazer inscrição" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+        <br />
+        <div>
+            @Html.ActionLink("Cancelar", "List", "Juri")
+        </div>
+    </div>
+</div>

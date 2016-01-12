@@ -1,0 +1,153 @@
+﻿@model IEnumerable<Sisjuri.Models.usuario>
+
+@{
+    ViewBag.Title = "Lista de usuários";
+    Sisjuri.Models.usuario user = ((Sisjuri.Models.usuario)Session["usuario"]);        
+}
+
+<div class="row">
+    <div class="main-box">
+
+        <h2>Lista de usuários</h2>
+        <p>
+            @Html.ActionLink("Perquisar usuários", "Index")
+            | @Html.ActionLink("Cadastrar novo usuário", "Create")
+        </p>
+        <br />
+        @{ 
+         if (ViewData["message"] != null && ViewData["message"].ToString() != "")
+         {
+            <div class="alert alert-success fade in">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="fa fa-check-circle fa-fw fa-lg"></i>
+                <strong>@ViewData["message"]</strong>
+            </div>
+         }
+         if (ViewData["messageError"] != null && ViewData["messageError"].ToString() != "")
+         {
+            <div class="alert alert-danger fade in">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="fa fa-times-circle fa-fw fa-lg"></i>
+                <strong>@ViewData["messageError"]</strong>
+            </div>
+         }
+
+        }
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            <span>Nome Completo</span>
+                        </th>
+                        <th>
+                            <span>CPF</span>
+                        </th>
+                        <th>
+                            <span>E-mail</span>
+                        </th>
+                        <th>
+                            <span>Telefone</span>
+                        </th>
+                        <th>
+                            <span>Perfil</span>
+                        </th>
+                        <th>
+                            <span>Ações</span>
+                        </th>
+                    </tr>
+                </thead>
+
+                @foreach (var item in Model)
+                {
+                    if (user.fk_id_perfil != 1 && item.fk_id_perfil != 1)
+                    {
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.nome_completo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.cpf_usuario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.email_usuario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.telefone_usuario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.perfil.nome_perfil)
+                            </td>
+                            <td style="width: 15%;">
+                                <a title="Ver detalhes" class="table-link" href="@Url.Action("Details", "Usuario", new { id = item.id_usuario})">
+                                    <span class=" fa-stack">
+                                        <i class="fa fa-square fa-stack-2x"></i>
+                                        <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                                <a title="Editar" class="table-link primary" href="@Url.Action("Edit", "Usuario", new { id = item.id_usuario })">
+                                    <span class="fa-stack">
+                                        <i class="fa fa-square fa-stack-2x"></i>
+                                        <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                                <a title="Excluir" class="table-link danger" href="@Url.Action("Delete", "Usuario", new { id = item.id_usuario })">
+                                    <span class="fa-stack">
+                                        <i class="fa fa-square fa-stack-2x"></i>
+                                        <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    }
+                    if (user.fk_id_perfil == 1)
+                    {
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.nome_completo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.cpf_usuario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.email_usuario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.telefone_usuario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.perfil.nome_perfil)
+                            </td>
+                            <td style="width: 15%;">
+                                <a title="Ver detalhes" class="table-link" href="@Url.Action("Details", "Usuario", new { id = item.id_usuario})">
+                                    <span class=" fa-stack">
+                                        <i class="fa fa-square fa-stack-2x"></i>
+                                        <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                                <a title="Editar" class="table-link primary" href="@Url.Action("Edit", "Usuario", new { id = item.id_usuario })">
+                                    <span class="fa-stack">
+                                        <i class="fa fa-square fa-stack-2x"></i>
+                                        <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                                <a title="Excluir" class="table-link danger" href="@Url.Action("Delete", "Usuario", new { id = item.id_usuario })">
+                                    <span class="fa-stack">
+                                        <i class="fa fa-square fa-stack-2x"></i>
+                                        <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>        
+                    }
+                }
+            </table>
+            <hr />
+        </div>
+    </div>
+</div>

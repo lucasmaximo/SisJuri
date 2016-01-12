@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="vgerarcertificadoreport" targetNamespace="http://tempuri.org/vgerarcertificadoreport.xsd" xmlns:mstns="http://tempuri.org/vgerarcertificadoreport.xsd" xmlns="http://tempuri.org/vgerarcertificadoreport.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection ConnectionStringObject="server=localhost;user id=root;password=root;persistsecurityinfo=True;database=sisjuri" IsAppSettingsProperty="false" Modifier="Assembly" Name="DataModel (Sisjuri)" ParameterPrefix="@" Provider="MySql.Data.MySqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="vgerarcertificadoTableAdapter" GeneratorDataComponentClassName="vgerarcertificadoTableAdapter" Name="vgerarcertificado" UserDataComponentName="vgerarcertificadoTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DataModel (Sisjuri)" DbObjectName="sisjuri.vgerarcertificado" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `nome_aluno`, `cpf_usuario`, `nome_funcao`, `nome_juri`, `local_juri`, `data_hora_juri`, `horas_certif` FROM `sisjuri`.`vgerarcertificado`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="nome_aluno" DataSetColumn="nome_aluno" />
+              <Mapping SourceColumn="cpf_usuario" DataSetColumn="cpf_usuario" />
+              <Mapping SourceColumn="nome_funcao" DataSetColumn="nome_funcao" />
+              <Mapping SourceColumn="nome_juri" DataSetColumn="nome_juri" />
+              <Mapping SourceColumn="local_juri" DataSetColumn="local_juri" />
+              <Mapping SourceColumn="data_hora_juri" DataSetColumn="data_hora_juri" />
+              <Mapping SourceColumn="horas_certif" DataSetColumn="horas_certif" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="vgerarcertificadoreport" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="vgerarcertificadoreport" msprop:Generator_UserDSName="vgerarcertificadoreport">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="vgerarcertificado" msprop:Generator_TableClassName="vgerarcertificadoDataTable" msprop:Generator_TableVarName="tablevgerarcertificado" msprop:Generator_TablePropName="vgerarcertificado" msprop:Generator_RowDeletingName="vgerarcertificadoRowDeleting" msprop:Generator_RowChangingName="vgerarcertificadoRowChanging" msprop:Generator_RowEvHandlerName="vgerarcertificadoRowChangeEventHandler" msprop:Generator_RowDeletedName="vgerarcertificadoRowDeleted" msprop:Generator_UserTableName="vgerarcertificado" msprop:Generator_RowChangedName="vgerarcertificadoRowChanged" msprop:Generator_RowEvArgName="vgerarcertificadoRowChangeEvent" msprop:Generator_RowClassName="vgerarcertificadoRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="nome_aluno" msprop:Generator_ColumnVarNameInTable="columnnome_aluno" msprop:Generator_ColumnPropNameInRow="nome_aluno" msprop:Generator_ColumnPropNameInTable="nome_alunoColumn" msprop:Generator_UserColumnName="nome_aluno">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="45" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="cpf_usuario" msprop:Generator_ColumnVarNameInTable="columncpf_usuario" msprop:Generator_ColumnPropNameInRow="cpf_usuario" msprop:Generator_ColumnPropNameInTable="cpf_usuarioColumn" msprop:Generator_UserColumnName="cpf_usuario">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="14" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="nome_funcao" msprop:Generator_ColumnVarNameInTable="columnnome_funcao" msprop:Generator_ColumnPropNameInRow="nome_funcao" msprop:Generator_ColumnPropNameInTable="nome_funcaoColumn" msprop:Generator_UserColumnName="nome_funcao">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="nome_juri" msprop:Generator_ColumnVarNameInTable="columnnome_juri" msprop:Generator_ColumnPropNameInRow="nome_juri" msprop:Generator_ColumnPropNameInTable="nome_juriColumn" msprop:Generator_UserColumnName="nome_juri">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="40" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="local_juri" msprop:Generator_ColumnVarNameInTable="columnlocal_juri" msprop:Generator_ColumnPropNameInRow="local_juri" msprop:Generator_ColumnPropNameInTable="local_juriColumn" msprop:Generator_UserColumnName="local_juri">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="45" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="data_hora_juri" msprop:Generator_ColumnVarNameInTable="columndata_hora_juri" msprop:Generator_ColumnPropNameInRow="data_hora_juri" msprop:Generator_ColumnPropNameInTable="data_hora_juriColumn" msprop:Generator_UserColumnName="data_hora_juri" type="xs:dateTime" />
+              <xs:element name="horas_certif" msprop:Generator_ColumnVarNameInTable="columnhoras_certif" msprop:Generator_ColumnPropNameInRow="horas_certif" msprop:Generator_ColumnPropNameInTable="horas_certifColumn" msprop:Generator_UserColumnName="horas_certif" type="xs:duration" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

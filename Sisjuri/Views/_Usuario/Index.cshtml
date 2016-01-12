@@ -1,0 +1,35 @@
+﻿<div style="font-family:Arial">
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>  
+    <script src="~/Scripts/jquery.validate.unobtrusive-ajax.min.js"></script>
+
+    <h2>Usuários</h2>
+
+    @Ajax.ActionLink("Todos", "All", new AjaxOptions()
+                               {
+                                   HttpMethod = "GET",
+                                   UpdateTargetId = "divUsuarios",
+                                   InsertionMode = InsertionMode.Replace
+                               })
+    |
+
+    @Ajax.ActionLink("3 Primeiros", "Top3", new AjaxOptions()
+                               {
+                                   HttpMethod = "GET",
+                                   UpdateTargetId = "divUsuarios",
+                                   InsertionMode = InsertionMode.Replace
+                               })
+    |
+
+    @Ajax.ActionLink("3 Últimos", "Bottom3", new AjaxOptions()
+                               {
+                                   HttpMethod = "GET",
+                                   UpdateTargetId = "divUsuarios",
+                                   InsertionMode = InsertionMode.Replace
+                               })
+    |
+
+    <div id="divUsuarios">
+
+    </div>
+</div>

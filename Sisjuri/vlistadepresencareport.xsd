@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="vlistadepresencareport" targetNamespace="http://tempuri.org/vlistadepresencareport.xsd" xmlns:mstns="http://tempuri.org/vlistadepresencareport.xsd" xmlns="http://tempuri.org/vlistadepresencareport.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection ConnectionStringObject="server=localhost;user id=root;password=root;persistsecurityinfo=True;database=sisjuri" IsAppSettingsProperty="false" Modifier="Assembly" Name="DataModel (Sisjuri)" ParameterPrefix="@" Provider="MySql.Data.MySqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="vlistadepresencaTableAdapter" GeneratorDataComponentClassName="vlistadepresencaTableAdapter" Name="vlistadepresenca" UserDataComponentName="vlistadepresencaTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DataModel (Sisjuri)" DbObjectName="sisjuri.vlistadepresenca" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `id_juri`, `nome_juri`, `nome_aluno`, `nome_curso`, `periodo_aluno`, `nome_funcao`, `conselho_sentenca`, `pres_entrada`, `pres_saida_total`, `pres_saida_parcial`, `hora_saida_parcial` FROM `sisjuri`.`vlistadepresenca`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="id_juri" DataSetColumn="id_juri" />
+              <Mapping SourceColumn="nome_juri" DataSetColumn="nome_juri" />
+              <Mapping SourceColumn="nome_aluno" DataSetColumn="nome_aluno" />
+              <Mapping SourceColumn="nome_curso" DataSetColumn="nome_curso" />
+              <Mapping SourceColumn="periodo_aluno" DataSetColumn="periodo_aluno" />
+              <Mapping SourceColumn="nome_funcao" DataSetColumn="nome_funcao" />
+              <Mapping SourceColumn="conselho_sentenca" DataSetColumn="conselho_sentenca" />
+              <Mapping SourceColumn="pres_entrada" DataSetColumn="pres_entrada" />
+              <Mapping SourceColumn="pres_saida_total" DataSetColumn="pres_saida_total" />
+              <Mapping SourceColumn="pres_saida_parcial" DataSetColumn="pres_saida_parcial" />
+              <Mapping SourceColumn="hora_saida_parcial" DataSetColumn="hora_saida_parcial" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="vlistadepresencareport" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="vlistadepresencareport" msprop:Generator_UserDSName="vlistadepresencareport">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="vlistadepresenca" msprop:Generator_TableClassName="vlistadepresencaDataTable" msprop:Generator_TableVarName="tablevlistadepresenca" msprop:Generator_TablePropName="vlistadepresenca" msprop:Generator_RowDeletingName="vlistadepresencaRowDeleting" msprop:Generator_RowChangingName="vlistadepresencaRowChanging" msprop:Generator_RowEvHandlerName="vlistadepresencaRowChangeEventHandler" msprop:Generator_RowDeletedName="vlistadepresencaRowDeleted" msprop:Generator_UserTableName="vlistadepresenca" msprop:Generator_RowChangedName="vlistadepresencaRowChanged" msprop:Generator_RowEvArgName="vlistadepresencaRowChangeEvent" msprop:Generator_RowClassName="vlistadepresencaRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="id_juri" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnid_juri" msprop:Generator_ColumnPropNameInRow="id_juri" msprop:Generator_ColumnPropNameInTable="id_juriColumn" msprop:Generator_UserColumnName="id_juri" type="xs:int" />
+              <xs:element name="nome_juri" msprop:Generator_ColumnVarNameInTable="columnnome_juri" msprop:Generator_ColumnPropNameInRow="nome_juri" msprop:Generator_ColumnPropNameInTable="nome_juriColumn" msprop:Generator_UserColumnName="nome_juri">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="40" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="nome_aluno" msprop:Generator_ColumnVarNameInTable="columnnome_aluno" msprop:Generator_ColumnPropNameInRow="nome_aluno" msprop:Generator_ColumnPropNameInTable="nome_alunoColumn" msprop:Generator_UserColumnName="nome_aluno">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="45" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="nome_curso" msprop:Generator_ColumnVarNameInTable="columnnome_curso" msprop:Generator_ColumnPropNameInRow="nome_curso" msprop:Generator_ColumnPropNameInTable="nome_cursoColumn" msprop:Generator_UserColumnName="nome_curso">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="45" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="periodo_aluno" msprop:Generator_ColumnVarNameInTable="columnperiodo_aluno" msprop:Generator_ColumnPropNameInRow="periodo_aluno" msprop:Generator_ColumnPropNameInTable="periodo_alunoColumn" msprop:Generator_UserColumnName="periodo_aluno" type="xs:int" minOccurs="0" />
+              <xs:element name="nome_funcao" msprop:Generator_ColumnVarNameInTable="columnnome_funcao" msprop:Generator_ColumnPropNameInRow="nome_funcao" msprop:Generator_ColumnPropNameInTable="nome_funcaoColumn" msprop:Generator_UserColumnName="nome_funcao">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="conselho_sentenca" msprop:Generator_ColumnVarNameInTable="columnconselho_sentenca" msprop:Generator_ColumnPropNameInRow="conselho_sentenca" msprop:Generator_ColumnPropNameInTable="conselho_sentencaColumn" msprop:Generator_UserColumnName="conselho_sentenca" type="xs:unsignedLong" />
+              <xs:element name="pres_entrada" msprop:Generator_ColumnVarNameInTable="columnpres_entrada" msprop:Generator_ColumnPropNameInRow="pres_entrada" msprop:Generator_ColumnPropNameInTable="pres_entradaColumn" msprop:Generator_UserColumnName="pres_entrada" type="xs:unsignedLong" />
+              <xs:element name="pres_saida_total" msprop:Generator_ColumnVarNameInTable="columnpres_saida_total" msprop:Generator_ColumnPropNameInRow="pres_saida_total" msprop:Generator_ColumnPropNameInTable="pres_saida_totalColumn" msprop:Generator_UserColumnName="pres_saida_total" type="xs:unsignedLong" />
+              <xs:element name="pres_saida_parcial" msprop:Generator_ColumnVarNameInTable="columnpres_saida_parcial" msprop:Generator_ColumnPropNameInRow="pres_saida_parcial" msprop:Generator_ColumnPropNameInTable="pres_saida_parcialColumn" msprop:Generator_UserColumnName="pres_saida_parcial" type="xs:unsignedLong" />
+              <xs:element name="hora_saida_parcial" msprop:Generator_ColumnVarNameInTable="columnhora_saida_parcial" msprop:Generator_ColumnPropNameInRow="hora_saida_parcial" msprop:Generator_ColumnPropNameInTable="hora_saida_parcialColumn" msprop:Generator_UserColumnName="hora_saida_parcial" type="xs:duration" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:vlistadepresenca" />
+      <xs:field xpath="mstns:id_juri" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

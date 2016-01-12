@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="vhistoricojurireport" targetNamespace="http://tempuri.org/vhistoricojurireport.xsd" xmlns:mstns="http://tempuri.org/vhistoricojurireport.xsd" xmlns="http://tempuri.org/vhistoricojurireport.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="1" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection ConnectionStringObject="server=localhost;user id=root;password=root;persistsecurityinfo=True;database=sisjuri" IsAppSettingsProperty="false" Modifier="Assembly" Name="DataModel (Sisjuri)" ParameterPrefix="@" Provider="MySql.Data.MySqlClient" />
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="sisjuriConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="sisjuriConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.sisjuriConnectionString.ConnectionString" Provider="MySql.Data.MySqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="vhistoricojuriTableAdapter" GeneratorDataComponentClassName="vhistoricojuriTableAdapter" Name="vhistoricojuri" UserDataComponentName="vhistoricojuriTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DataModel (Sisjuri)" DbObjectName="sisjuri.vhistoricojuri" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT `id_juri`, `nome_juri`, `data_hora_juri`, `local_juri`, `juri_ativo`, `inscricao_sorteada`, `nome_aluno`, `nome_curso`, `nome_funcao`, `id_processo`, `num_processo`, `descricao_processo`, `texto_sentenca` FROM `sisjuri`.`vhistoricojuri`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="id_juri" DataSetColumn="id_juri" />
+              <Mapping SourceColumn="nome_juri" DataSetColumn="nome_juri" />
+              <Mapping SourceColumn="data_hora_juri" DataSetColumn="data_hora_juri" />
+              <Mapping SourceColumn="local_juri" DataSetColumn="local_juri" />
+              <Mapping SourceColumn="juri_ativo" DataSetColumn="juri_ativo" />
+              <Mapping SourceColumn="inscricao_sorteada" DataSetColumn="inscricao_sorteada" />
+              <Mapping SourceColumn="nome_aluno" DataSetColumn="nome_aluno" />
+              <Mapping SourceColumn="nome_curso" DataSetColumn="nome_curso" />
+              <Mapping SourceColumn="nome_funcao" DataSetColumn="nome_funcao" />
+              <Mapping SourceColumn="id_processo" DataSetColumn="id_processo" />
+              <Mapping SourceColumn="num_processo" DataSetColumn="num_processo" />
+              <Mapping SourceColumn="descricao_processo" DataSetColumn="descricao_processo" />
+              <Mapping SourceColumn="texto_sentenca" DataSetColumn="texto_sentenca" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="vhistoricojurireport" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="vhistoricojurireport" msprop:Generator_UserDSName="vhistoricojurireport">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="vhistoricojuri" msprop:Generator_TableClassName="vhistoricojuriDataTable" msprop:Generator_TableVarName="tablevhistoricojuri" msprop:Generator_RowChangedName="vhistoricojuriRowChanged" msprop:Generator_TablePropName="vhistoricojuri" msprop:Generator_RowDeletingName="vhistoricojuriRowDeleting" msprop:Generator_RowChangingName="vhistoricojuriRowChanging" msprop:Generator_RowEvHandlerName="vhistoricojuriRowChangeEventHandler" msprop:Generator_RowDeletedName="vhistoricojuriRowDeleted" msprop:Generator_RowClassName="vhistoricojuriRow" msprop:Generator_UserTableName="vhistoricojuri" msprop:Generator_RowEvArgName="vhistoricojuriRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="id_juri" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnid_juri" msprop:Generator_ColumnPropNameInRow="id_juri" msprop:Generator_ColumnPropNameInTable="id_juriColumn" msprop:Generator_UserColumnName="id_juri" type="xs:int" />
+              <xs:element name="nome_juri" msprop:Generator_ColumnVarNameInTable="columnnome_juri" msprop:Generator_ColumnPropNameInRow="nome_juri" msprop:Generator_ColumnPropNameInTable="nome_juriColumn" msprop:Generator_UserColumnName="nome_juri">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="40" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="data_hora_juri" msprop:Generator_ColumnVarNameInTable="columndata_hora_juri" msprop:Generator_ColumnPropNameInRow="data_hora_juri" msprop:Generator_ColumnPropNameInTable="data_hora_juriColumn" msprop:Generator_UserColumnName="data_hora_juri" type="xs:dateTime" />
+              <xs:element name="local_juri" msprop:Generator_ColumnVarNameInTable="columnlocal_juri" msprop:Generator_ColumnPropNameInRow="local_juri" msprop:Generator_ColumnPropNameInTable="local_juriColumn" msprop:Generator_UserColumnName="local_juri">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="45" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="juri_ativo" msprop:Generator_ColumnVarNameInTable="columnjuri_ativo" msprop:Generator_ColumnPropNameInRow="juri_ativo" msprop:Generator_ColumnPropNameInTable="juri_ativoColumn" msprop:Generator_UserColumnName="juri_ativo" type="xs:unsignedLong" />
+              <xs:element name="inscricao_sorteada" msprop:Generator_ColumnVarNameInTable="columninscricao_sorteada" msprop:Generator_ColumnPropNameInRow="inscricao_sorteada" msprop:Generator_ColumnPropNameInTable="inscricao_sorteadaColumn" msprop:Generator_UserColumnName="inscricao_sorteada" type="xs:unsignedLong" />
+              <xs:element name="nome_aluno" msprop:Generator_ColumnVarNameInTable="columnnome_aluno" msprop:Generator_ColumnPropNameInRow="nome_aluno" msprop:Generator_ColumnPropNameInTable="nome_alunoColumn" msprop:Generator_UserColumnName="nome_aluno">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="45" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="nome_curso" msprop:Generator_ColumnVarNameInTable="columnnome_curso" msprop:Generator_ColumnPropNameInRow="nome_curso" msprop:Generator_ColumnPropNameInTable="nome_cursoColumn" msprop:Generator_UserColumnName="nome_curso">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="45" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="nome_funcao" msprop:Generator_ColumnVarNameInTable="columnnome_funcao" msprop:Generator_ColumnPropNameInRow="nome_funcao" msprop:Generator_ColumnPropNameInTable="nome_funcaoColumn" msprop:Generator_UserColumnName="nome_funcao">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="id_processo" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnid_processo" msprop:Generator_ColumnPropNameInRow="id_processo" msprop:Generator_ColumnPropNameInTable="id_processoColumn" msprop:Generator_UserColumnName="id_processo" type="xs:int" />
+              <xs:element name="num_processo" msprop:Generator_ColumnVarNameInTable="columnnum_processo" msprop:Generator_ColumnPropNameInRow="num_processo" msprop:Generator_ColumnPropNameInTable="num_processoColumn" msprop:Generator_UserColumnName="num_processo">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="descricao_processo" msprop:Generator_ColumnVarNameInTable="columndescricao_processo" msprop:Generator_ColumnPropNameInRow="descricao_processo" msprop:Generator_ColumnPropNameInTable="descricao_processoColumn" msprop:Generator_UserColumnName="descricao_processo" type="xs:string" />
+              <xs:element name="texto_sentenca" msprop:Generator_ColumnVarNameInTable="columntexto_sentenca" msprop:Generator_ColumnPropNameInRow="texto_sentenca" msprop:Generator_ColumnPropNameInTable="texto_sentencaColumn" msprop:Generator_UserColumnName="texto_sentenca" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:vhistoricojuri" />
+      <xs:field xpath="mstns:id_juri" />
+      <xs:field xpath="mstns:id_processo" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

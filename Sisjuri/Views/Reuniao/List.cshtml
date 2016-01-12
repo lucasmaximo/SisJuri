@@ -1,0 +1,115 @@
+﻿@model IEnumerable<Sisjuri.Models.reuniao>
+
+@{
+    ViewBag.Title = "Lista de reuniões";
+    Sisjuri.Models.usuario user = ((Sisjuri.Models.usuario)Session["usuario"]);
+}
+
+<div class="row">
+    <div class="main-box">
+
+        <h2>Lista de reuniões</h2>
+        <p>
+            @Html.ActionLink("Perquisar reuniões", "Index")
+            | @Html.ActionLink("Cadastrar nova reunião", "Create")
+        </p>
+        <br />
+        @{ if (ViewData["message"] != null && ViewData["message"].ToString() != "")
+         {
+            <div class="alert alert-success fade in">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="fa fa-check-circle fa-fw fa-lg"></i>
+                <strong>@ViewData["message"]</strong>
+            </div>
+         }
+
+        }
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            <span>Nome da reunião</span>
+                        </th>
+                        <th>
+                            <span>Data e hora</span>
+                        </th>
+                        <th>
+                            <span>Local da reunião</span>
+                        </th>
+                        <th>
+                            <span>Participantes</span>
+                        </th>
+                        <th>
+                            <span>Pertence ao</span>
+                        </th>
+                        <th>
+                            <span>Ações</span>
+                        </th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tbody>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.nome_reuniao)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.data_hora_reuniao)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.local_reuniao)
+                                </td>
+                                <td>
+                                @{ if (user.fk_id_perfil == 1 || user.fk_id_perfil == 2 )
+                                 {
+                                    <a title="Lista de participantes" class="table-link ques4" href="@Url.Action("ListParticipantesByReuniao", "ParticipantesReuniao", new { id = item.id_reuniao})">
+                                        <span class=" fa-stack">
+                                            <i class="fa fa-square fa-stack-2x"></i>
+                                            <i class="fa fa-group fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                }
+                                }
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.juri.nome_juri)
+                                </td>
+                                <td style="width: 15%;">
+                                    @{ if (user.fk_id_perfil != 4)
+                                     {
+                                        <a title="Ver detalhes" class="table-link" href="@Url.Action("Details", "Reuniao", new { id = item.id_reuniao})">
+                                            <span class=" fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                     }
+                                    }
+                                    @{ if (user.fk_id_perfil == 1 || user.fk_id_perfil == 2 || user.fk_id_perfil == 3)
+                                     {
+                                        <a title="Editar" class="table-link primary" href="@Url.Action("Edit", "Reuniao", new { id = item.id_reuniao })">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                        <a title="Excluir" class="table-link danger" href="@Url.Action("Delete", "Reuniao", new { id = item.id_reuniao })">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                     }
+                                    }
+                                </td>
+                            </tr>
+                        </tbody>
+                    }
+            </table>
+            <hr />
+        </div>
+    </div>
+</div>

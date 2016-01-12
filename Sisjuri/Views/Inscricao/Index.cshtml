@@ -1,0 +1,77 @@
+﻿@model Sisjuri.Models.inscricao
+
+@{
+    ViewBag.Title = "Pesquisar inscrições";
+}
+
+<div class="row">
+    <div class="main-box">
+        <h2>Pesquisar inscrições</h2>
+
+        @using (Html.BeginForm("List", "inscricao"))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor( model => model.funcao)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.usuario.num_matric_aluno, "Nº da matrícula do aluno", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.usuario.num_matric_aluno, new { size = 15, maxlength = 15 })
+                        @Html.ValidationMessageFor(model => model.usuario.num_matric_aluno)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.usuario.nome_completo, "Nome do participante", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.usuario.nome_completo, new { size = 30, maxlength = 45 })
+                        @Html.ValidationMessageFor(model => model.usuario.nome_completo)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.fk_id_funcao, "Função", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.fk_id_funcao, new SelectList(ViewData["lstFuncao"] as System.Collections.IEnumerable, "id_funcao", "nome_funcao"))
+
+                        @Html.ValidationMessageFor(model => model.fk_id_funcao)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.status_inscricao, "Status da inscrição", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <select class="" name="status_inscricao">
+                            <option value=""></option>
+                            <option value="Pendente">Pendente</option>
+                            <option value="Autorizada">Autorizada</option>
+                            <option value="Recusada">Recusada</option>
+                        </select>
+                        @Html.ValidationMessageFor(model => model.status_inscricao)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.fk_id_juri, "Júri simulado", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.fk_id_juri, new SelectList(ViewData["lstJuri"] as System.Collections.IEnumerable, "id_juri", "nome_juri"))
+                        @Html.ValidationMessageFor(model => model.fk_id_juri)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Pesquisar" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+        <div>
+            @Html.ActionLink("Ir à lista de júris simulados", "List", "Juri")
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+﻿@model Sisjuri.Models.curso
+
+@{
+    ViewBag.Title = "Excluir curso";
+}
+
+<div class="row">
+    <div class="main-box">
+        <h2>Tem certeza que deseja excluir este curso?</h2>
+        <div>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.LabelFor(model => model.nome_curso, "Nome do curso")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.nome_curso)
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.descricao_curso, "Descrição")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.descricao_curso)
+                </dd>
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Excluir" class="btn btn-default" /> |
+                    @Html.ActionLink("Voltar à lista", "List")
+                </div>
+            }
+        </div>
+    </div>
+</div>

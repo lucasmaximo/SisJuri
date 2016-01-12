@@ -1,0 +1,96 @@
+﻿@model Sisjuri.Models.usuario
+
+@{
+    Sisjuri.Models.usuario user = ((Sisjuri.Models.usuario)Session["usuario"]);    
+    ViewBag.Title = "Editar aluno";
+}
+
+<div class="row">
+    <div class="main-box">
+        <h2>Editar aluno</h2>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(model => model.id_usuario)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.nome_completo, "Nome Completo", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.nome_completo, new { size = 30, maxlength = 30 })
+                        @Html.ValidationMessageFor(model => model.nome_completo)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.cpf_usuario, "CPF", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.cpf_usuario, new { id = "cpf", size = 14, maxlength = 14 })
+                        @Html.ValidationMessageFor(model => model.cpf_usuario)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.senha_usuario, "Senha", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(model => model.senha_usuario, new { size = 20, maxlength = 15 })
+                        @Html.ValidationMessageFor(model => model.senha_usuario)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.email_usuario, "Email", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.email_usuario, new { size = 30, maxlength = 45 })
+                        @Html.ValidationMessageFor(model => model.email_usuario)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.telefone_usuario, "Telefone", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.telefone_usuario, new { id = "telefonenew", size = 30, maxlength = 15 })
+                        @Html.ValidationMessageFor(model => model.telefone_usuario)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.num_matric_aluno, "Nº de matrícula", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.num_matric_aluno, new { size = 15, maxlength = 15 })
+                        @Html.ValidationMessageFor(model => model.num_matric_aluno)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.fk_id_curso, "Curso", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("fk_id_curso", new SelectList(ViewData["lstCurso"] as System.Collections.IEnumerable, "id_curso", "nome_curso"))
+                        @Html.ValidationMessageFor(model => model.fk_id_curso)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.periodo_aluno, "Período", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.periodo_aluno, new { size = 3, maxlength = 3 }) º
+                        @Html.ValidationMessageFor(model => model.periodo_aluno)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Salvar" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+        <div>
+            @Html.ActionLink("Cancelar", "Index", "Home")
+        </div>
+    </div>
+</div>

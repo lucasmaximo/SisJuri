@@ -1,0 +1,54 @@
+﻿@model Sisjuri.Models.usuario
+
+@{
+    ViewBag.Title = "Pesquisar usuários";
+}
+
+<div class="row">
+    <div class="main-box">
+        <h2>Pesquisar usuário</h2>
+
+        @using (Html.BeginForm("List", "usuario"))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.curso.id_curso, "Curso", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("fk_id_curso", new SelectList(ViewData["lstCurso"] as System.Collections.IEnumerable, "id_curso", "nome_curso"))
+                        @Html.ValidationMessageFor(model => model.curso.id_curso)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.nome_completo, "Nome Completo", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.nome_completo, new { size = 30, maxlength = 30 })
+                        @Html.ValidationMessageFor(model => model.nome_completo)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.cpf_usuario, "CPF", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.cpf_usuario, new { id = "cpf", size = 14, maxlength = 14 })
+                        @Html.ValidationMessageFor(model => model.cpf_usuario)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Pesquisar" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+        <div>
+            @Html.ActionLink("Voltar à lista", "List")
+        </div>
+    </div>
+</div>

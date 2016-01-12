@@ -1,0 +1,96 @@
+﻿@model IEnumerable<Sisjuri.Models.ques_tentativa>
+
+@{
+    ViewBag.Title = "Lista de quesitos da tentativa";
+    Sisjuri.Models.usuario user = ((Sisjuri.Models.usuario)Session["usuario"]);
+}
+
+<div class="row">
+    <div class="main-box">
+
+        <h2>Lista de quesitos da tentativa</h2>
+        <p>
+        @{if (user.fk_id_perfil == 1 || user.fk_id_perfil == 2)
+        {
+            @Html.ActionLink("Cadastrar novo quesito da tentativa", "Create")
+        }}
+        </p>
+        <br />
+        @{ if (ViewData["message"] != null && ViewData["message"].ToString() != "")
+         {
+            <div class="alert alert-success fade in">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="fa fa-check-circle fa-fw fa-lg"></i>
+                <strong>@ViewData["message"]</strong>
+            </div>
+         }
+
+        }
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            <span>Quesito da tentativa</span>
+                        </th>
+                        <th>
+                            <span>Votos "Sim"</span>
+                        </th>
+                        <th>
+                            <span>Votos "Não"</span>
+                        </th>
+                        <th>
+                            <span>Ações</span>
+                        </th>
+                    </tr>
+                </thead>
+
+                @foreach (var item in Model)
+                {
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.quesito_tentativa)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.qt_sim)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.qt_nao)
+                            </td>
+                            <td style="width: 15%;">
+                                <a title="Ver detalhes" class="table-link" href="@Url.Action("Details", "QuesTentativa", new { id = item.id_quesito_tentativa })">
+                                    <span class=" fa-stack">
+                                        <i class="fa fa-square fa-stack-2x"></i>
+                                        <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                                @{ if(user.fk_id_perfil == 1 || user.fk_id_perfil == 2)
+                                    {
+                                        <a title="Editar" class="table-link primary" href="@Url.Action("Edit", "QuesTentativa", new { id = item.id_quesito_tentativa })">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                        <a title="Excluir" class="table-link danger" href="@Url.Action("Delete", "QuesTentativa", new { id = item.id_quesito_tentativa })">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                    }   
+                                }
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+            <hr />
+            <div>
+                @Html.ActionLink("Voltar à lista de processos", "List", "Processo")
+            </div>
+        </div>
+    </div>
+</div>

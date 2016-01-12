@@ -1,0 +1,42 @@
+﻿@model Sisjuri.Models.documento
+
+@{
+    ViewBag.Title = "Excluir documento";
+}
+
+<div class="row">
+    <div class="main-box">
+        <h2>Tem certeza que deseja excluir este documento?</h2>
+        <div>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.LabelFor(model => model.nome_documento, "Nome do documento")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.nome_documento)
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.juri.nome_juri, "Pertence ao")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.juri.nome_juri)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Excluir" class="btn btn-default" /> |
+                    @Html.ActionLink("Voltar à lista", "List")
+                </div>
+            }
+        </div>
+    </div>
+</div>

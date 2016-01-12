@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Sisjuri.Models.vsorteiofuncoes>
+
+@{
+    ViewBag.Title = "Sorteados para o júri simulado";
+    Sisjuri.Models.usuario user = ((Sisjuri.Models.usuario)Session["usuario"]);
+}
+
+<div class="row">
+    <div class="main-box">
+
+        <h2>Sorteados para o júri simulado</h2>
+        <p>
+            @Html.ActionLink("Voltar à lista de júris simulados", "List", "Juri")
+        </p>
+        <br />
+        @{ if (ViewData["message"] != null && ViewData["message"].ToString() != "")
+         {
+            <div class="alert alert-success fade in">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="fa fa-check-circle fa-fw fa-lg"></i>
+                <strong>@ViewData["message"]</strong>
+            </div>
+         }   
+         if (ViewData["messageError"] != null && ViewData["messageError"].ToString() != "")
+         {
+            <div class="alert alert-danger fade in">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="fa fa-times-circle fa-fw fa-lg"></i>
+                <strong>@ViewData["messageError"]</strong>
+            </div>
+         }
+         
+
+        }
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            <span>Nome do aluno</span>
+                        </th>
+                        <th>
+                            <span>Nº de matrícula</span>
+                        </th>
+                        <th>
+                            <span>Curso</span>
+                        </th>
+                        <th>
+                            <span>Período</span>
+                        </th>
+                        <th>
+                            <span>Função</span>
+                        </th>
+                    </tr>
+                </thead>
+
+                @foreach (var item in Model)
+                {
+                    <tbody>
+                        <tr>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.nome_aluno)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.num_matric_aluno)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.nome_curso)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.periodo_aluno)º período
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.nome_funcao)
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+            <hr />
+            <div> 
+                @Html.ActionLink("Exportar PDF", "InscricoesSorteadas", new { idJuri = Request.QueryString["idJuri"] })
+            </div>
+        </div>
+    </div>
+</div>

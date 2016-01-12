@@ -1,0 +1,61 @@
+﻿@model Sisjuri.Models.participantes_reuniao
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+<div class="row">
+    <div class="main-box">
+        <h2>Detalhes do participante da reunião</h2>
+        <div>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.LabelFor(model => model.inscricao.usuario.nome_completo, "Nome completo")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.inscricao.usuario.nome_completo)
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.inscricao.usuario.num_matric_aluno, "Nº de matrícula")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.inscricao.usuario.num_matric_aluno)
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.inscricao.usuario.curso.nome_curso, "Curso")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.inscricao.usuario.curso.nome_curso)
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.inscricao.usuario.periodo_aluno, "Período")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.inscricao.usuario.periodo_aluno)º período
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.inscricao.usuario.periodo_aluno, "Função")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.inscricao.funcao.nome_funcao)
+                </dd>
+
+
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Editar", "Edit", new { id = Model.id_participante_reuniao }) |
+            @Html.ActionLink("Voltar à lista", "ListParticipantesByReuniao", new { id = Model.pfk_id_reuniao })
+        </p>
+    </div>
+</div>

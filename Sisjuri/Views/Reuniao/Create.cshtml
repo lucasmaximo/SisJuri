@@ -1,0 +1,71 @@
+﻿@model Sisjuri.Models.reuniao
+
+@{
+    ViewBag.Title = "Cadastrar reunião";
+}
+
+<div class="row">
+    <div class="main-box">
+        <h2>Cadastrar reunião</h2>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <hr />
+
+                @Html.ValidationSummary(true)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.nome_reuniao, "Nome da reunião", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.nome_reuniao, new { size = 30, maxlength = 45 })
+                        @Html.ValidationMessageFor(model => model.nome_reuniao)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.data_hora_reuniao, "Data e hora", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.data_hora_reuniao)
+                        @Html.ValidationMessageFor(model => model.data_hora_reuniao)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.local_reuniao, "Local da reunião", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.local_reuniao, new { size = 30, maxlength = 45 })
+                        @Html.ValidationMessageFor(model => model.local_reuniao)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.resultado_reuniao, "Resultado da reunião", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.resultado_reuniao, new { cols = 50, rows = 4 })
+                        @Html.ValidationMessageFor(model => model.resultado_reuniao)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.fk_id_juri, "Pertence ao", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.fk_id_juri, new SelectList(ViewData["lstJuriCompleto"] as System.Collections.IEnumerable, "id_juri", "nome_juri"))
+                        @Html.ValidationMessageFor(model => model.fk_id_juri)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Cadastrar" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+        <div>
+            @Html.ActionLink("Cancelar", "List")
+        </div>
+    </div>
+</div>

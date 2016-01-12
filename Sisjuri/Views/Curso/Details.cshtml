@@ -1,0 +1,36 @@
+﻿@model Sisjuri.Models.curso
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+<div class="row">
+    <div class="main-box">
+        <h2>Detalhes do curso</h2>
+        <div>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.LabelFor(model => model.nome_curso, "Nome do curso")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.nome_curso)
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.descricao_curso, "Descrição")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.descricao_curso)
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Editar", "Edit", new { id = Model.id_curso }) |
+            @Html.ActionLink("Voltar à lista", "List")
+        </p>
+    </div>
+</div>

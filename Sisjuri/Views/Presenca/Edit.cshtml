@@ -1,0 +1,125 @@
+﻿@model Sisjuri.Models.presenca
+
+@{
+    ViewBag.Title = "Editar presença";
+}
+
+<div class="row">
+    <div class="main-box">
+        <h2>Editar presença</h2>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(model => model.id_presenca)
+                @Html.HiddenFor(model => model.pfk_id_juri)
+                @Html.HiddenFor(model => model.pfk_id_inscricao)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.juri.nome_juri, "Júri simulado", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DisplayFor(model => model.juri.nome_juri)
+                        @Html.ValidationMessageFor(model => model.juri.nome_juri)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.inscricao.usuario.nome_completo, "Nome do aluno", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DisplayFor(model => model.inscricao.usuario.nome_completo)
+                        @Html.ValidationMessageFor(model => model.inscricao.usuario.nome_completo)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.inscricao.usuario.num_matric_aluno, "Nº da matrícula", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DisplayFor(model => model.inscricao.usuario.num_matric_aluno)
+                        @Html.ValidationMessageFor(model => model.inscricao.usuario.num_matric_aluno)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.inscricao.usuario.curso.nome_curso, "Curso", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DisplayFor(model => model.inscricao.usuario.curso.nome_curso)
+                        @Html.ValidationMessageFor(model => model.inscricao.usuario.curso.nome_curso)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.inscricao.usuario.periodo_aluno, "Período do aluno", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DisplayFor(model => model.inscricao.usuario.periodo_aluno)º período
+                        @Html.ValidationMessageFor(model => model.inscricao.usuario.periodo_aluno)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.inscricao.funcao.nome_funcao, "Função", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DisplayFor(model => model.inscricao.funcao.nome_funcao)
+                        @Html.ValidationMessageFor(model => model.inscricao.funcao.nome_funcao)
+                    </div>
+                </div>
+
+                @{if (Model.inscricao.fk_id_funcao == 4)
+                  {
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.conselho_sentenca, "Fez parte do conselho de sentença?", new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.CheckBoxFor(model => model.conselho_sentenca)
+                            @Html.ValidationMessageFor(model => model.conselho_sentenca)
+                        </div>
+                    </div>
+                  }
+                }
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.pres_entrada, "Entrada", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.CheckBoxFor(model => model.pres_entrada)
+                        @Html.ValidationMessageFor(model => model.pres_entrada)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.pres_saida_total, "Saída", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.CheckBoxFor(model => model.pres_saida_total)
+                        @Html.ValidationMessageFor(model => model.pres_saida_total)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.pres_saida_parcial, "Saída antes do fim", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.CheckBoxFor(model => model.pres_saida_parcial)
+                        @Html.ValidationMessageFor(model => model.pres_saida_parcial)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.hora_saida_parcial, "Hora da saída", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.hora_saida_parcial, new { size = 10 })
+                        @Html.ValidationMessageFor(model => model.hora_saida_parcial)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Salvar" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+        <div>
+            @Html.ActionLink("Cancelar", "ListAllByAutorizados", new { id = Model.pfk_id_juri, idJuri = Model.pfk_id_juri })
+        </div>
+    </div>
+</div>

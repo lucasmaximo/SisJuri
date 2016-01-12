@@ -1,0 +1,99 @@
+﻿@model Sisjuri.Models.inscricao
+
+@{
+    ViewBag.Title = "Excluir inscrição";
+}
+
+<div class="row">
+    <div class="main-box">
+        <h2>Tem certeza que deseja excluir esta inscrição?</h2>
+        <div>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.LabelFor(model => model.juri.nome_juri, "Inscrição feita no")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.juri.nome_juri)
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.usuario.nome_completo, "Nome do participante")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.usuario.nome_completo)
+                </dd>
+
+                @{if (Model.usuario.fk_id_perfil == 4)
+                  {
+                    <dt>
+                        @Html.LabelFor(model => model.usuario.num_matric_aluno, "Nº da matrícula")
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.usuario.num_matric_aluno)
+                    </dd>
+
+                    <dt>
+                        @Html.LabelFor(model => model.usuario.curso.nome_curso, "Curso")
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.usuario.curso.nome_curso)
+                    </dd>
+
+                    <dt>
+                        @Html.LabelFor(model => model.usuario.periodo_aluno, "Período")
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.usuario.periodo_aluno)º período
+                    </dd>
+                  }   
+                }
+                
+                <dt>
+                    @Html.LabelFor(model => model.status_inscricao, "Status da inscrição")
+                </dt>
+
+                <dd>
+                    @{
+                        if (Model.status_inscricao.Equals("Autorizada"))
+                        {
+                            <span class="label label-success">@Html.DisplayFor(modelItem => Model.status_inscricao)</span>
+                        }
+                        if (Model.status_inscricao.Equals("Pendente"))
+                        {
+                            <span class="label label-warning">@Html.DisplayFor(modelItem => Model.status_inscricao)</span>
+                        }
+                        if (Model.status_inscricao.Equals("Recusada"))
+                        {
+                            <span class="label label-danger">@Html.DisplayFor(modelItem => Model.status_inscricao)</span>
+                        }
+                    }
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.funcao.nome_funcao, "Função")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.funcao.nome_funcao)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Excluir" class="btn btn-default" /> |
+                    @Html.ActionLink("Voltar à lista", "ListByIdJuri", new { id = Model.fk_id_juri })
+                </div>
+            }
+        </div>
+    </div>
+</div>

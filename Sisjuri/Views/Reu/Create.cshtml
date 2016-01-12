@@ -1,0 +1,46 @@
+﻿@model Sisjuri.Models.reu
+
+@{
+    ViewBag.Title = "Cadastrar réu";
+}
+
+<div class="row">
+    <div class="main-box">
+        <h2>Cadastrar réu</h2>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.nome_reu, "Nome do réu", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.nome_reu, new { size = 35, maxlength = 45 })
+                        @Html.ValidationMessageFor(model => model.nome_reu)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.fk_id_processo, "Pertence ao processo nº", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.fk_id_processo, new SelectList(ViewData["lstProcesso"] as System.Collections.IEnumerable, "id_processo", "num_processo"))
+                        @Html.ValidationMessageFor(model => model.fk_id_processo)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Cadastrar" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+        <div>
+            @Html.ActionLink("Cancelar", "List", "Processo")
+        </div>
+    </div>
+</div>

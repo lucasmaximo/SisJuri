@@ -1,0 +1,65 @@
+﻿@model Sisjuri.Models.npj
+
+@{
+    ViewBag.Title = "Excluir NPJ";
+}
+
+<div class="row">
+    <div class="main-box">
+        <h2>Tem certeza que deseja excluir este NPJ?</h2>
+        <div>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.LabelFor(model => model.nome_npj, "Nome do NPJ")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.nome_npj)
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.cnpj_npj, "CNPJ")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.cnpj_npj)
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.endereco_npj, "Endereço")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.endereco_npj)
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.telefone_npj, "Telefone")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.telefone_npj)
+                </dd>
+                <dt>
+                    @Html.LabelFor(model => model.faculdade.nome_faculdade, "Pertence a")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.faculdade.nome_faculdade)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Excluir" class="btn btn-default" /> |
+                    @Html.ActionLink("Voltar à lista", "List")
+                </div>
+            }
+        </div>
+    </div>
+</div>

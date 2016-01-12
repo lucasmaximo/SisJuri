@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="vsorteiofuncoesreport" targetNamespace="http://tempuri.org/vsorteiofuncoesreport.xsd" xmlns:mstns="http://tempuri.org/vsorteiofuncoesreport.xsd" xmlns="http://tempuri.org/vsorteiofuncoesreport.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection ConnectionStringObject="server=localhost;user id=root;password=root;persistsecurityinfo=True;database=sisjuri" IsAppSettingsProperty="false" Modifier="Assembly" Name="DataModel (Sisjuri)" ParameterPrefix="@" Provider="MySql.Data.MySqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="vsorteiofuncoesTableAdapter" GeneratorDataComponentClassName="vsorteiofuncoesTableAdapter" Name="vsorteiofuncoes" UserDataComponentName="vsorteiofuncoesTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DataModel (Sisjuri)" DbObjectName="sisjuri.vsorteiofuncoes" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `id_juri`, `nome_aluno`, `num_matric_aluno`, `nome_curso`, `periodo_aluno`, `nome_funcao` FROM `sisjuri`.`vsorteiofuncoes`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="id_juri" DataSetColumn="id_juri" />
+              <Mapping SourceColumn="nome_aluno" DataSetColumn="nome_aluno" />
+              <Mapping SourceColumn="num_matric_aluno" DataSetColumn="num_matric_aluno" />
+              <Mapping SourceColumn="nome_curso" DataSetColumn="nome_curso" />
+              <Mapping SourceColumn="periodo_aluno" DataSetColumn="periodo_aluno" />
+              <Mapping SourceColumn="nome_funcao" DataSetColumn="nome_funcao" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="vsorteiofuncoesreport" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="vsorteiofuncoesreport" msprop:Generator_UserDSName="vsorteiofuncoesreport">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="vsorteiofuncoes" msprop:Generator_TableClassName="vsorteiofuncoesDataTable" msprop:Generator_TableVarName="tablevsorteiofuncoes" msprop:Generator_TablePropName="vsorteiofuncoes" msprop:Generator_RowDeletingName="vsorteiofuncoesRowDeleting" msprop:Generator_RowChangingName="vsorteiofuncoesRowChanging" msprop:Generator_RowEvHandlerName="vsorteiofuncoesRowChangeEventHandler" msprop:Generator_RowDeletedName="vsorteiofuncoesRowDeleted" msprop:Generator_UserTableName="vsorteiofuncoes" msprop:Generator_RowChangedName="vsorteiofuncoesRowChanged" msprop:Generator_RowEvArgName="vsorteiofuncoesRowChangeEvent" msprop:Generator_RowClassName="vsorteiofuncoesRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="id_juri" msprop:Generator_ColumnVarNameInTable="columnid_juri" msprop:Generator_ColumnPropNameInRow="id_juri" msprop:Generator_ColumnPropNameInTable="id_juriColumn" msprop:Generator_UserColumnName="id_juri" type="xs:int" />
+              <xs:element name="nome_aluno" msprop:Generator_ColumnVarNameInTable="columnnome_aluno" msprop:Generator_ColumnPropNameInRow="nome_aluno" msprop:Generator_ColumnPropNameInTable="nome_alunoColumn" msprop:Generator_UserColumnName="nome_aluno">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="45" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="num_matric_aluno" msprop:Generator_ColumnVarNameInTable="columnnum_matric_aluno" msprop:Generator_ColumnPropNameInRow="num_matric_aluno" msprop:Generator_ColumnPropNameInTable="num_matric_alunoColumn" msprop:Generator_UserColumnName="num_matric_aluno" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="nome_curso" msprop:Generator_ColumnVarNameInTable="columnnome_curso" msprop:Generator_ColumnPropNameInRow="nome_curso" msprop:Generator_ColumnPropNameInTable="nome_cursoColumn" msprop:Generator_UserColumnName="nome_curso">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="45" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="periodo_aluno" msprop:Generator_ColumnVarNameInTable="columnperiodo_aluno" msprop:Generator_ColumnPropNameInRow="periodo_aluno" msprop:Generator_ColumnPropNameInTable="periodo_alunoColumn" msprop:Generator_UserColumnName="periodo_aluno" type="xs:int" minOccurs="0" />
+              <xs:element name="nome_funcao" msprop:Generator_ColumnVarNameInTable="columnnome_funcao" msprop:Generator_ColumnPropNameInRow="nome_funcao" msprop:Generator_ColumnPropNameInTable="nome_funcaoColumn" msprop:Generator_UserColumnName="nome_funcao">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

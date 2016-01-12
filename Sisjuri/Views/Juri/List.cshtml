@@ -1,0 +1,160 @@
+﻿@model IEnumerable<Sisjuri.Models.juri>
+
+@{
+    Sisjuri.Models.usuario user = ((Sisjuri.Models.usuario)Session["usuario"]);
+    ViewBag.Title = "Lista de júris simulados";
+}
+
+<div class="row">
+    <div class="main-box">
+
+        <h2>Lista de júris simulados</h2>
+        <p>
+            @Html.ActionLink("Perquisar júris simulados", "Index") |
+            @{if(user.fk_id_perfil == 1 || user.fk_id_perfil == 2){
+                @Html.ActionLink("Cadastrar novo júri simulado", "Create")
+            }}
+        </p>
+        <br />
+        @{ if (ViewData["message"] != null && ViewData["message"].ToString() != "")
+         {
+            <div class="alert alert-success fade in">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="fa fa-check-circle fa-fw fa-lg"></i>
+                <strong>@ViewData["message"]</strong>
+            </div>
+         }
+         if (ViewData["messageError"] != null && ViewData["messageError"].ToString() != "")
+         {
+            <div class="alert alert-danger fade in">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="fa fa-times-circle fa-fw fa-lg"></i>
+                <strong>@ViewData["messageError"]</strong>
+            </div>
+         }
+
+        }
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            <span>Nome do júri simulado</span>
+                        </th>
+                        <th>
+                            <span>Data e hora do evento</span>
+                        </th>
+                        <th>
+                            <span>Local do evento</span>
+                        </th>
+                        <th>
+                            <span>Interações</span>
+                        </th>
+                        <th>
+                            <span>Ações</span>
+                        </th>
+                    </tr>
+                </thead>
+
+                @foreach (var item in Model)
+                {
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.nome_juri)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.data_hora_juri)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.local_juri)
+                            </td>
+                            <td style="width: 20%;">
+                                @{
+                                if(item.juri_sorteado == false)
+                                {
+                                    <a title="Realizar inscrição" class="table-link" href="@Url.Action("Create", "Inscricao", new { id = item.id_juri})">
+                                        <span class=" fa-stack">
+                                            <i class="fa fa-square fa-stack-2x"></i>
+                                            <i class="fa fa-user-plus fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                }
+                                }
+                                <a title="Lista de inscrições" class="table-link ques4" href="@Url.Action("ListByIdJuri", "Inscricao", new { id = item.id_juri })">
+                                    <span class=" fa-stack">
+                                        <i class="fa fa-square fa-stack-2x"></i>
+                                        <i class="fa fa-list-ul fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                                @{ if (item.juri_sorteado == false && (user.fk_id_perfil == 1 || user.fk_id_perfil == 2))
+                                 {
+                                    <a title="Sortear funções" class="table-link ques1" href="@Url.Action("Sortear", "Inscricao", new { id = item.id_juri })">
+                                        <span class=" fa-stack">
+                                            <i class="fa fa-square fa-stack-2x"></i>
+                                            <i class="fa fa-random fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                 }
+                                   if(item.juri_sorteado == true)
+                                   {
+                                    <a title="Inscrições sorteadas" class="table-link ques3" href="@Url.Action("ListBySortJuriAndExport", "Inscricao", new { idJuri = item.id_juri })">
+                                        <span class=" fa-stack">
+                                            <i class="fa fa-square fa-stack-2x"></i>
+                                            <i class="fa fa-child fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                    <a title="Lista de presença" class="table-link primary " href="@Url.Action("ListAllByAutorizados", "Presenca", new { id = item.id_juri, idJuri = item.id_juri })">
+                                        <span class=" fa-stack">
+                                            <i class="fa fa-square fa-stack-2x"></i>
+                                            <i class="fa fa-group fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                    }
+                                 }
+                                @{ if( item.juri_ativo == false)
+                                   {
+                                    <a title="Relatório do júri simulado" class="table-link ques2" href="@Url.Action("HistoricoJuri", "HistoricoJuri", new { idJuri = item.id_juri })">
+                                        <span class=" fa-stack">
+                                            <i class="fa fa-square fa-stack-2x"></i>
+                                            <i class="fa fa-history fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>                                       
+                                   }
+                                    
+                                }
+
+                            </td>
+                            <td style="width: 15%;">
+                                <a title="Ver detalhes" class="table-link" href="@Url.Action("Details", "Juri", new { id = item.id_juri})">
+                                    <span class=" fa-stack">
+                                        <i class="fa fa-square fa-stack-2x"></i>
+                                        <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                                @{ if(user.fk_id_perfil == 1 || user.fk_id_perfil == 2)
+                                    {
+                                        <a title="Editar" class="table-link primary" href="@Url.Action("Edit", "Juri", new { id = item.id_juri })">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                        <a title="Excluir" class="table-link danger" href="@Url.Action("Delete", "Juri", new { id = item.id_juri })">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>                                  
+                                    }
+                                }
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+            <hr />
+        </div>
+    </div>
+</div>

@@ -1,0 +1,154 @@
+﻿@model IEnumerable<Sisjuri.Models.presenca>
+
+@{
+    ViewBag.Title = "Resultado da pesquisa na lista de presença do júri simulado";
+    Sisjuri.Models.usuario user = ((Sisjuri.Models.usuario)Session["usuario"]);
+}
+
+<div class="row">
+    <div class="main-box">
+
+        <h2>Presença do júri simulado</h2>
+        <p>
+            @Html.ActionLink("Voltar à lista de júris simulados", "List", "Juri")
+        </p>
+        <br />
+        @{ if (ViewData["message"] != null && ViewData["message"].ToString() != "")
+         {
+            <div class="alert alert-success fade in">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="fa fa-check-circle fa-fw fa-lg"></i>
+                <strong>@ViewData["message"]</strong>
+            </div>
+         }
+
+        }
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            <span>Nome do aluno</span>
+                        </th>
+                        <th>
+                            <span>Função</span>
+                        </th>
+                        <th>
+                            <span>Entrada</span>
+                        </th>
+                        <th>
+                            <span>Conselho de sentença?</span>
+                        </th>
+                        <th>
+                            <span>Saída no fim</span>
+                        </th>
+                        <th>
+                            <span>Saída antes do fim</span>
+                        </th>
+                        <th>
+                            <span>Hora da saída</span>
+                        </th>
+                        <th>
+                            <span>Ações</span>
+                        </th>
+                    </tr>
+                </thead>
+
+                @foreach (var item in Model)
+                {
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.inscricao.usuario.nome_completo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.inscricao.funcao.nome_funcao)
+                            </td>
+                            <td>
+                                @{
+                                    if (item.pres_entrada == null || item.pres_entrada == false)
+                                    {
+                                        <span class="label label-danger">Não</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="label label-success">Sim</span>
+                                    }
+                                }
+                            </td>
+                            <td>
+                                @{
+                                    if (item.conselho_sentenca == null || item.conselho_sentenca == false)
+                                    {
+                                        <span>-</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="label label-success">Sim</span>
+                                    }
+                                }
+                            </td>
+
+                            <td>
+                                @{
+                                    if (item.pres_saida_total == true)
+                                    {
+                                        <span class="label label-success">Sim</span>
+                                    }
+                                    else
+                                    {
+                                        <span>-</span>
+                                    }
+                                }
+                            </td>
+                            <td>
+                                @{
+                                    if (item.pres_saida_parcial == true)
+                                    {
+                                        <span class="label label-success">Sim</span>
+                                    }
+                                    else
+                                    {
+                                        <span>-</span>
+                                    }
+                                }
+                            </td>
+                            <td>
+                                @{
+                                    if (item.pres_saida_parcial == true && item.pres_saida_total == false)
+                                    {
+                                        @Html.DisplayFor(modelItem => item.hora_saida_parcial)
+                                    }
+                                    else
+                                    {
+                                        <span>-</span>
+                                    }
+                                }
+                            </td>
+
+                            <td style="width: 15%;">
+                                <a title="Ver detalhes" class="table-link" href="@Url.Action("Details", "Presenca", new { id = item.id_presenca })">
+                                    <span class=" fa-stack">
+                                        <i class="fa fa-square fa-stack-2x"></i>
+                                        <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                                @{ if (user.fk_id_perfil == 1 || user.fk_id_perfil == 2)
+                                    {
+                                        <a title="Editar" class="table-link primary" href="@Url.Action("Edit", "Presenca", new { id = item.id_presenca, idJuri = Request.QueryString["idJuri"] })">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                    }
+                                }
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+            <hr />
+        </div>
+    </div>
+</div>

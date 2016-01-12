@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Sisjuri.Models.usuario>
+
+@{
+    ViewBag.Title = "Lista de usuários - Ajax";
+}
+
+<h2>Usuários</h2>
+
+        <div class="table-responsive">
+            <table class="table" >
+                <tr>
+                    <th>
+                        <span>Nome Completo</span>
+                    </th>
+                    <th>
+                        <span>CPF</span>
+                    </th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nome_completo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.cpf_usuario)
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>

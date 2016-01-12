@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Sisjuri.Models.documento>
+
+@{
+    Sisjuri.Models.usuario user = ((Sisjuri.Models.usuario)Session["usuario"]);
+    ViewBag.Title = "Lista de documentos";
+}
+
+<div class="row">
+    <div class="main-box">
+
+        <h2>Lista de documentos</h2>
+        <p>
+            @Html.ActionLink("Perquisar documentos", "Index") |
+            @{if(user.fk_id_perfil == 1 || user.fk_id_perfil == 2){
+                @Html.ActionLink("Inserir novo documento", "Create")
+            }}
+        </p>
+        <br />
+        @{ if (ViewData["message"] != null && ViewData["message"].ToString() != "")
+         {
+            <div class="alert alert-success fade in">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="fa fa-check-circle fa-fw fa-lg"></i>
+                <strong>@ViewData["message"]</strong>
+            </div>
+         }
+
+         }
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            <span>Nome do documento</span>
+                        </th>
+                        <th>
+                            <span>Pertence ao</span>
+                        </th>
+                        <th>
+                            <span>Ações</span>
+                        </th>
+                    </tr>
+                </thead>
+
+                @foreach (var item in Model)
+                {
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.nome_documento)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.juri.nome_juri)
+                            </td>
+                            <td style="width: 15%;">
+                                <a title="Baixar" class="table-link" href="@Url.Action("Download", "Documento", new { id = item.id_documento })">
+                                    <span class=" fa-stack">
+                                        <i class="fa fa-square fa-stack-2x"></i>
+                                        <i class="fa fa-download fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                                @{if (user.fk_id_perfil == 1 || user.fk_id_perfil == 2) 
+                                { 
+                                <a title="Excluir" class="table-link danger" href="@Url.Action("Delete", "Documento", new { id = item.id_documento })">
+                                    <span class="fa-stack">
+                                        <i class="fa fa-square fa-stack-2x"></i>
+                                        <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>                                      
+                                }}
+
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+            <hr />
+        </div>
+    </div>
+</div>

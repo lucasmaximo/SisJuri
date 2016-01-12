@@ -1,0 +1,66 @@
+﻿@model Sisjuri.Models.ques_atenuante
+
+@{
+    ViewBag.Title = "Excluir quesito atenuante";
+}
+
+<div class="row">
+    <div class="main-box">
+        <h2>Tem certeza que deseja excluir este quesito atenuante?</h2>
+        <div>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.LabelFor(model => model.quesito_atenuante, "Quesito atenuante")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.quesito_atenuante)
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.qat_sim, "Votos 'Sim'")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.qat_sim)
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.qat_nao, "Votos 'Não'")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.qat_sim)
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.processo.num_processo, "Pertence ao processo nº")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.processo.num_processo)
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.processo.juri.nome_juri, "Julgado no")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.processo.juri.nome_juri)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Excluir" class="btn btn-default" /> |
+                    @Html.ActionLink("Voltar à lista", "ListByIdProcess", new { id = Model.fk_id_processo })
+                </div>
+            }
+        </div>
+    </div>
+</div>

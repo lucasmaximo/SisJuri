@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Sisjuri.Models.curso>
+
+@{
+    ViewBag.Title = "Lista de cursos";
+}
+
+<div class="row">
+    <div class="main-box">
+
+        <h2>Lista de cursos</h2>
+        <p>
+            @Html.ActionLink("Perquisar cursos", "Index")
+            | @Html.ActionLink("Cadastrar novo curso", "Create")
+        </p>
+        <br />
+        @{ if (ViewData["message"] != null && ViewData["message"].ToString() != "")
+         {
+            <div class="alert alert-success fade in">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="fa fa-check-circle fa-fw fa-lg"></i>
+                <strong>@ViewData["message"]</strong>
+            </div>
+         }
+         if (ViewData["messageError"] != null && ViewData["messageError"].ToString() != "")
+         {
+            <div class="alert alert-danger fade in">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="fa fa-times-circle fa-fw fa-lg"></i>
+                <strong>@ViewData["messageError"]</strong>
+            </div>
+         }
+
+        }
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            <span>Nome do curso</span>
+                        </th>
+                        <th>
+                            <span>Descrição do curso</span>
+                        </th>
+                        <th>
+                            <span>Ações</span>
+                        </th>
+                    </tr>
+                </thead>
+
+                @foreach (var item in Model)
+                {
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.nome_curso)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.descricao_curso)
+                            </td>
+                            <td style="width: 15%;">
+                                <a title="Ver detalhes" class="table-link" href="@Url.Action("Details", "Curso", new { id = item.id_curso })">
+                                    <span class=" fa-stack">
+                                        <i class="fa fa-square fa-stack-2x"></i>
+                                        <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                                <a title="Editar" class="table-link primary" href="@Url.Action("Edit", "Curso", new { id = item.id_curso })">
+                                    <span class="fa-stack">
+                                        <i class="fa fa-square fa-stack-2x"></i>
+                                        <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                                <a title="Excluir" class="table-link danger" href="@Url.Action("Delete", "Curso", new { id = item.id_curso })">
+                                    <span class="fa-stack">
+                                        <i class="fa fa-square fa-stack-2x"></i>
+                                        <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+            <hr />
+        </div>
+    </div>
+</div>

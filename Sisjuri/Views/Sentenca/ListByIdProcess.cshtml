@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Sisjuri.Models.sentenca>
+
+@{
+    ViewBag.Title = "Lista de sentenças";
+    Sisjuri.Models.usuario user = ((Sisjuri.Models.usuario)Session["usuario"]);
+}
+
+<div class="row">
+    <div class="main-box">
+
+        <h2>Lista de sentenças</h2>
+        <p>
+        @{if (user.fk_id_perfil == 1 || user.fk_id_perfil == 2)
+        {
+            @Html.ActionLink("Cadastrar nova sentença", "Create")
+        }}
+        </p>
+        <br />
+        @{ if (ViewData["message"] != null && ViewData["message"].ToString() != "")
+         {
+            <div class="alert alert-success fade in">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="fa fa-check-circle fa-fw fa-lg"></i>
+                <strong>@ViewData["message"]</strong>
+            </div>
+         }
+
+        }
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            <span>Texto da sentença</span>
+                        </th>
+                        <th>
+                            <span>Ações</span>
+                        </th>
+                    </tr>
+                </thead>
+
+                @foreach (var item in Model)
+                {
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.texto_sentenca)
+                            </td>
+                            <td style="width: 15%;">
+                                <a title="Ver detalhes" class="table-link" href="@Url.Action("Details", "Sentenca", new { id = item.id_sentenca })">
+                                    <span class=" fa-stack">
+                                        <i class="fa fa-square fa-stack-2x"></i>
+                                        <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                                @{ if(user.fk_id_perfil == 1 || user.fk_id_perfil == 2)
+                                    {
+                                        <a title="Editar" class="table-link primary" href="@Url.Action("Edit", "Sentenca", new { id = item.id_sentenca })">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                        <a title="Excluir" class="table-link danger" href="@Url.Action("Delete", "Sentenca", new { id = item.id_sentenca })">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                    }
+                                }
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+            <hr />
+            <div>
+                @Html.ActionLink("Voltar à lista de processos", "List", "Processo")
+            </div>
+        </div>
+    </div>
+</div>

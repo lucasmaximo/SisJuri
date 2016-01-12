@@ -1,0 +1,98 @@
+﻿@model Sisjuri.Models.inscricao
+
+@{
+    ViewBag.Title = "Editar inscrição";
+}
+
+<div class="row">
+    <div class="main-box">
+        <h2>Editar inscrição</h2>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(model => model.id_inscricao)
+                @Html.HiddenFor(model => model.pfk_id_usuario)
+                @Html.HiddenFor(model => model.fk_id_juri)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.juri.nome_juri, "Júri simulado", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DisplayFor(model => model.juri.nome_juri)
+                        @Html.ValidationMessageFor(model => model.juri.nome_juri)
+                    </div>
+                </div>
+                 
+                <div class="form-group">
+                    @Html.LabelFor(model => model.usuario.nome_completo, "Nome do participante", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DisplayFor(model => model.usuario.nome_completo)
+                        @Html.ValidationMessageFor(model => model.usuario.nome_completo)
+                    </div>
+                </div>
+
+                @{if (Model.usuario.fk_id_perfil == 4)
+                  {
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.usuario.num_matric_aluno, "Nº da matrícula", new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DisplayFor(model => model.usuario.num_matric_aluno)
+                            @Html.ValidationMessageFor(model => model.usuario.num_matric_aluno)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.usuario.curso.nome_curso, "Curso", new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DisplayFor(model => model.usuario.curso.nome_curso)
+                            @Html.ValidationMessageFor(model => model.usuario.curso.nome_curso)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.usuario.periodo_aluno, "Período do aluno", new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DisplayFor(model => model.usuario.periodo_aluno)º período
+                            @Html.ValidationMessageFor(model => model.usuario.periodo_aluno)
+                        </div>
+                    </div>
+                  }
+                }
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.fk_id_funcao, "Função", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.fk_id_funcao, new SelectList(ViewData["lstFuncao"] as System.Collections.IEnumerable, "id_funcao", "nome_funcao"))
+                        @Html.ValidationMessageFor(model => model.fk_id_funcao)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.status_inscricao, "Status da inscrição", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.status_inscricao, new List<SelectListItem>
+                        {
+                            new SelectListItem { Text = "Pendente", Value = "Pendente" },
+                            new SelectListItem { Text = "Autorizada", Value = "Autorizada" },
+                            new SelectListItem { Text = "Recusada", Value = "Recusada" }
+                        })
+                        @Html.ValidationMessageFor(model => model.status_inscricao)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Salvar" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+        <div>
+            @Html.ActionLink("Cancelar", "ListByIdJuri", new { id = Model.fk_id_juri })
+        </div>
+    </div>
+</div>

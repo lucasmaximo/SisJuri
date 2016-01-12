@@ -1,0 +1,37 @@
+﻿@model Sisjuri.Models.perfil
+
+@{
+    ViewBag.Title = "Detalhes do perfil";
+}
+
+<h1>Detalhes</h1>
+<div class="row">
+    <div class="main-box">
+        <h2>Perfil</h2>
+        <div>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.LabelFor(model => model.nome_perfil, "Nome do perfil")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.nome_perfil)
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.descricao_perfil, "Descrição do perfil")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.descricao_perfil)
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Editar", "Edit", new { id = Model.id_perfil }) |
+            @Html.ActionLink("Voltar à lista", "List")
+        </p>
+    </div>
+</div>

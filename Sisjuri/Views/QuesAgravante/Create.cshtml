@@ -1,0 +1,62 @@
+﻿@model Sisjuri.Models.ques_agravante
+
+@{
+    ViewBag.Title = "Cadastrar quesito agravante";
+}
+
+<div class="row">
+    <div class="main-box">
+        <h2>Cadastrar quesito agravante</h2>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.quesito_agravante, "Quesito agravante", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.quesito_agravante, new { cols = 50, rows = 4 })
+                        @Html.ValidationMessageFor(model => model.quesito_agravante)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.qag_sim, "Votos 'Sim'", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.qag_sim, new { size = 2, maxlength = 2 })
+                        @Html.ValidationMessageFor(model => model.qag_sim)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.qag_nao, "Votos 'Não'", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.qag_nao, new { size = 2, maxlength = 2 })
+                        @Html.ValidationMessageFor(model => model.qag_nao)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.fk_id_processo, "Pertence ao processo nº", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.fk_id_processo, new SelectList(ViewData["lstProcesso"] as System.Collections.IEnumerable, "id_processo", "num_processo"))
+                        @Html.ValidationMessageFor(model => model.fk_id_processo)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Cadastrar" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+        <div>
+            @Html.ActionLink("Cancelar", "List", "Processo")
+        </div>
+    </div>
+</div>

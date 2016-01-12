@@ -1,0 +1,40 @@
+﻿@model Sisjuri.Models.perfil
+
+@{
+    ViewBag.Title = "Pesquisar perfis";
+}
+
+<h1>Pesquisar</h1>
+<div class="row">
+    <div class="main-box">
+        <h2>Perfil</h2>
+
+        @using (Html.BeginForm("List", "perfil"))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.nome_perfil, "Nome do perfil", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.nome_perfil, new { size = 30, maxlength = 30 })
+                        @Html.ValidationMessageFor(model => model.nome_perfil)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Pesquisar" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div>
+            @Html.ActionLink("Voltar à lista", "List")
+        </div>
+    </div>
+</div>

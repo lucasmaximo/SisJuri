@@ -1,0 +1,43 @@
+﻿@model Sisjuri.Models.perfil
+
+@{
+    ViewBag.Title = "Excluir perfil";
+}
+
+<h1>Excluir</h1>
+<div class="row">
+    <div class="main-box">
+        <h4>Você tem certeza que deseja excluir este perfil?</h4>
+        <div>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.LabelFor(model => model.nome_perfil, "Nome do perfil")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.nome_perfil)
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.descricao_perfil, "Descrição do perfil")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.descricao_perfil)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Excluir" class="btn btn-default" /> |
+                    @Html.ActionLink("Voltar à lista", "Index")
+                </div>
+            }
+        </div>
+    </div>
+</div>

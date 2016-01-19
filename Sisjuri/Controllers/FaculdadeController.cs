@@ -172,7 +172,7 @@ namespace Sisjuri.Controllers
             return retorno;
         }
 
-        //Validar CNPJ 
+        //Método que valida o CNPJ 
         public bool ValidaCNPJ(string vrCNPJ)
         {
  
